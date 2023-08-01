@@ -4,7 +4,6 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-
   font-weight: normal;
 }
 
@@ -31,5 +30,6 @@ a,
     display: flex;
     flex-direction: column;
     padding: 0 2rem;
+    
   }
 }

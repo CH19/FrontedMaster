@@ -1,0 +1,26 @@
+body{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+header{
+    display: flex;
+    width: 100vw;
+    justify-content: space-around;
+
+    & ul{
+        display: flex;
+        list-style: none;
+        text-decoration: none;
+        justify-content: space-around;
+        width: 40rem;
+        & li:hover{
+            color: red;
+        }
+    }
+    ul{
+        
+}
+
+
+}
