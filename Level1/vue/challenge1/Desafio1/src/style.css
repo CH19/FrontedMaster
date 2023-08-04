@@ -1,0 +1,25 @@
+body {
+  background-color: #FFF;
+}
+
+ion-icon {
+  padding: 5px;
+}
+
+#Buscador {
+  display: flex;
+}
+#Buscador input {
+  width: 20rem;
+}
+
+fiugre-container {
+  display: flex;
+  width: 15rem;
+}
+
+.menu-drop {
+  height: 500px;
+}
+
+/*# sourceMappingURL=style.css.map */

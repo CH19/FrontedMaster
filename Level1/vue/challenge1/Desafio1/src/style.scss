@@ -1,0 +1,22 @@
+@import 'variables.scss';
+body{
+    background-color: $fondo;
+}
+ion-icon{
+    // width: 30px;
+    // height: 1rem;
+    padding: 5px;
+}
+#Buscador{
+    display: flex;
+    & input{
+        width: 20rem;
+    }
+}
+fiugre-container{
+    display: flex;
+    width: 15rem;
+}
+.menu-drop{
+    height: 500px;
+}
