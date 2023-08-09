@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <input type="text" id="buscador"> 
+        <button id="request">Hacer Peticion</button>
+
+    </div>
+  <div id="resultado"></div>  
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <script>
+    // Prbando el uso de peticiones ajax 
+    'use strict'
+    let xhtr = new XMLHttpRequest();
+    const request = document.getElementById('request');
+    const resultado = document.getElementById('resultado');
+    const buscador = document.getElementById('buscador');
+
+    request.onclick = function(){
+        let url = `http://www.omdbapi.com/?apikey=7a711b58&s=${buscador.value}`
+        xhtr.open('get', url);
+        xhtr.send();
+    }
+    xhtr.onreadystatechange = function(){
+       try{
+        if(this.readyState == 4 && this.status == 200){
+            console.log('llego la respuesta');
+            const respuesta = JSON.parse(this.responseText)
+            resultado.innerText = '';
+            if(respuesta.Response == 'True'){
+                console.log(respuesta.Search);
+                respuesta.Search.forEach(titulo =>{
+                    $('#resultado').append(`<p>${titulo.Title}</p>`)
+                })
+                resultado.innerHTML += '<br>'
+                resultado.innerText += respuesta.totalResults + 'resultados';
+            }else{
+                resultado.innerText = 'No hay coincidencias';
+            }
+        }
+       }catch(e){
+        resultado.innerText = 'error al procesar los datos';
+       }
+    }
+  </script>
+</body>
+</html>

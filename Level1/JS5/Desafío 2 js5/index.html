@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafío 2</title>
+    <script src="code.jquery.com_jquery-3.7.0.min.js"></script>
+</head>
+<body>
+    
+    <main id="people-1"></main>
+
+    <main id="#loading-main">
+        <img src="spinner.gif" id="loading">
+    </main>
+
+    <main>
+        <button onclick="loadAJAX()">Requerimiento 2</button>
+
+        <ol id="people-2"></ol>
+    </main>
+
+    <main>
+        <button onclick="loadGETJSON()">Requerimiento 3</button>
+
+        <div id="guy-div"></div>
+    </main>
+
+    <script src="main.js"></script>
+</body>
+</html>
+
+<style>
+    body{
+        font-family: sans-serif;
+    }
+    main{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 2rem;
+        & > div.user{
+            display: flex;
+            width: 15rem;
+            align-items: center;
+            justify-content: start;
+            margin-bottom: 1rem;
+            & > img{
+                margin-right: 2rem;
+                width: 6rem;
+                height: 6rem;
+            }
+        }
+
+        & > button{
+            padding: 0 2rem;
+            height: 3rem;
+        }
+
+        & > ol#people-2{
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            & > li.user{
+                display: flex;
+                align-items: center;
+                margin-bottom: 1rem;
+
+                & > img{
+                    margin-right: 2rem;
+                    width: 6rem;
+                    height: 6rem;
+                }
+            }
+        }
+
+        #guy-div{
+            margin: 2rem 0;
+        
+            & > p{
+                text-align: center;
+            }
+        }
+
+        #loading{
+            position:fixed;
+            height: 20rem;
+            width: 20rem;
+            top: 24vh;
+        }
+    }
+
+    main#loading-main{
+        position: relative;
+        background-color: aliceblue;
+    }
+
+</style>
