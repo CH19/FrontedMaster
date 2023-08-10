@@ -10,13 +10,31 @@ const cliente = reactive({
    imgLogo: 'https://yt3.googleusercontent.com/ytc/AOPolaSKpYFNhsdiuWA5_g_5wtvx-FDkp8Anl7Zy3UPQ=s176-c-k-c0x00ffffff-no-rj',
    imgBanner:'https://yt3.googleusercontent.com/VKIQ_KxkTb21Xo3zDFcnPkMWe3_gYVH5Ey_TMbGwkKYmZdsGS5GTVCAQ7g-6HVpkhK8hPSmSNw=w1707-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj',
 });
+const enlaces = ref([{
+    logo: './assets/Img/Cadif1-Logo.svg',
+    enlace: 'https://cadif1.com/',
+  }
+  ,{
+  logo:'<ion-icon name="logo-facebook"></ion-icon>',
+  enlace: 'https://www.facebook.com/cadif1'
+},
+,{
+  logo: '<ion-icon name="logo-instagram"></ion-icon>',
+  enlace: 'https://www.instagram.com/cadif1/'}
+]);
+const opccionesCanal = ['Pagina principal', 'Videos', 'Short', 'En vivo', 'Listas de Reproducción', 'Comunidad', 'Canales', 'Información']
 const imagenFondo = {'background-image': `url(${cliente.imgBanner})`}
+const busqueda = ref('')
 const Logo = cliente.imgLogo;
 let itsBotonClicked = ref(false)
 // Boton funcionalidad
 function aldarClick(){
   itsBotonClicked.value = !itsBotonClicked.value;
 }
+function mensaje(m){
+  alert(m);
+}
+
 </script>
 
 <template>
@@ -51,7 +69,7 @@ function aldarClick(){
 
 </nav>
 </header>
-<main class="">
+<main>
   <div class=" container-card mx-0 px-0">
     <figure>
       <ion-icon name="home-outline"></ion-icon>
@@ -59,7 +77,7 @@ function aldarClick(){
     </figure>
     <figure>
       <ion-icon name="play-circle-outline"></ion-icon>
-      <span>Shorts</span>
+      <span>Shorts</span> 
     </figure>
     <figure>
       <ion-icon name="briefcase-outline"></ion-icon>
@@ -70,29 +88,56 @@ function aldarClick(){
       <span>Mi biblioteca</span>
     </figure>
   </div>
-  <div class=" channel mx-0 px-0">
+  <div class="channel mx-0 px-0">
     <div :style="imagenFondo" class="banner-channel py-0 my-0 bg-inf">
+      <div id="enlaces" class="d-flex">
+        <figure class="border-top border-start border-bottom"><a @click.prevent.stop="mensaje('le diste click a cadif')" href=""><img src="./assets/Img/Cadif1-Logo.svg" @click="alert('le diste click a Cadif')" style="width: 14px; height: 14px; background-color: orange;" alt=""></a>
+        </figure>
+        <figure class="border-top border-bottom" @click.prevent.stop="mensaje('le diste click a facebook')"><a href=""><ion-icon name="logo-facebook"></ion-icon></a></figure>
+
+        <figure class="border-top border-end border-bottom"><a href=""><ion-icon @click.prevent.stop="mensaje('le diste click a instagram')" name="logo-instagram"></ion-icon></a>
+        </figure>
+      </div>
  </div>
 <div class="channel-information">
 <figure>
   <img :src="Logo" alt="">
 </figure>
-<div class="content">
+<!-- Requerimiento 5  -->
+<div class="content" v-if="itsBotonClicked">
   <div class="data-container">
-    <h5 class="card-title">{{ cliente.Nombre}}</h5>
-        <p class="channel-title">{{ cliente.usuario }}<span>{{ cliente.nroSuscriptores }}</span><span>{{ cliente.nroVideos }}</span></p>
+    <h5 class="card-title">{{ cliente.Nombre.toUpperCase()}}</h5>
+        <p class="channel-title">{{ cliente.usuario.toUpperCase() }}<span>{{ cliente.nroSuscriptores.toUpperCase() }}</span><span>{{ cliente.nroVideos.toUpperCase() }}</span></p>
 <div class="channel-description">
-  <p class="channel-descripccion text-light "><small class="text-body-secondary">{{ cliente.descripcionBreve }}</small></p>
+  <p class="channel-descripccion text-light "><small class="text-body-secondary"> {{ cliente.descripcionBreve.toUpperCase() }}</small></p>
 
 </div>
   </div>
 </div>
+<div class="content" v-else>
+  <div class="data-container" >
+    <h5 class="card-title"><i>{{ cliente.Nombre}}</i></h5>
+        <p class="channel-title"><i>{{ cliente.usuario }}<span>{{ cliente.nroSuscriptores }}</span><span>{{ cliente.nroVideos }}</span></i></p>
+<div class="channel-description">
+  <p class="channel-descripccion text-light "><small class="text-body-secondary"><i> {{ cliente.descripcionBreve }}</i></small></p>
+
+</div>
+  </div>
+
+</div>
+
 <div class="suscribed-container">
   <button @click="aldarClick" :class="itsBotonClicked ? 'btn btn-light': 'btn btn-dark'">{{ itsBotonClicked ? 'Suscrito': 'Suscribirse'}}</button>
 </div>
 </div>
+<div class="d-flex justify-content-around border-bottom" style="width:70rem;">
+  <!-- Requerimiento 4  -->
+  <!-- Se utilizo la directiva v-for aunque no la hemos visto para maquetar mas rapido los enunciados html espero que no haya ningun problema  -->
+  <div v-for="opccion in opccionesCanal" :key="opccion" class="fw-light" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">{{ opccion }}</div>
+  <div><ion-icon name="search-outline"></ion-icon><input type="text" v-model="busqueda"></div>
+</div>
   </div>
-  
+  <h1>{{ busqueda }}</h1>
 </main>
 
 </template>
@@ -104,9 +149,10 @@ function aldarClick(){
   background-size: contain;
   background-position: 0;
   background-repeat: no-repeat;
+  position: relative;
 }
 .channel{
-  height: 400px;
+  height: 500px;
 }
 
 .container-card{
@@ -162,5 +208,14 @@ justify-content: flex-start;
 main{
   display: grid;
   grid-template-columns: 130px 1fr;
+}
+#enlaces{
+  position: absolute;
+  bottom: 10px;
+  right: 0;
+  padding: 20px;
+  & figure{
+    padding: 10px;
+  }
 }
 </style>
