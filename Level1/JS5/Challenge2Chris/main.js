@@ -9,7 +9,6 @@ $(function(){
         alert('solicitud imposible de procesar');
     })
     const xhtr = new XMLHttpRequest();
-    const resultado = document.getElementById('resultado');
     const url2 = 'https://reqres.in/api/users?page=2';
     const userSearch = document.getElementById('userSearch');
     request.onclick = function(){

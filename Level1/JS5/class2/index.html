@@ -3,16 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>PeliMovies</title>
 </head>
 <body>
-    <div>
+    <h1>Buscador de Peliculas</h1>
+    <div id="searchMovie">
         <input type="text" id="buscador"> 
+        <input type="hidden" name="page" id="page" value="0">
         <button id="request">Hacer Peticion</button>
         <button id="cargar">Cargar</button>
 
     </div><hr>
   <div id="resultado"></div>  
+  <button id="siguiente">Cargar mas</button>
   <figure id="loading">
     <img src="./Spinner-1s-200px.gif" alt="">
   </figure>
@@ -53,12 +56,17 @@
     // }
 console.log('hola mundo');
 $('#loading').hide();
+$(document).on('ajaxStart', function(){
+    $('#loading').show();
+}).on('ajaxStop', function(){
+    $('#loading').hide();
+}).on('ajaxErorr', function(){
+    alert('Solicitud no procesada');
+})
 $('#cargar').click(function(){
     $('#resultado').load('pag2.html')
-})
-
+});
     $('#request').click(function(){
-        $('#loading').show()
         // $.ajax({
         //     url: `http://www.omdbapi.com/?apikey=7a711b58&s=${buscador.value}`,
         //     type: 'get',
@@ -79,15 +87,20 @@ $('#cargar').click(function(){
 
 
         // })
-        $.getJSON(`http://www.omdbapi.com/?apikey=7a711b58&s=${buscador.value}`, function(resp){
+       let page =  1;
+        $.getJSON(`http://www.omdbapi.com/?apikey=7a711b58&s=${buscador.value}&page=${page}`, function(resp){
             mostrarResultados(resp);
-            $('#loading').hide();
-
+            $('#siguiente').on('click', function(){
+                page++;
+                console.log(page)
+                mostrarResultados(resp);
+            })
         })
    })
    function mostrarResultados(respuesta){
         let respuestaTexto = '';
         resultado.innerHTML = '';
+        console.log(respuesta)
         if(respuesta.Response == 'True'){
             respuesta.Search.forEach(element => respuestaTexto+= `
             <div>
@@ -99,7 +112,12 @@ $('#cargar').click(function(){
             $('#resultado').append('<br>');
             $('#resultado').append(`Total resultados: ${respuesta.totalResults}`);
         }
-
+   }
+   function cargarPages(resp){
+    if(page <= Number(resp.totalResults / 10)){
+        page++;
+        mostrarResultados(resp);
+    }
    }
   </script>
 </body>

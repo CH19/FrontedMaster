@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Probando Fetch</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+</head>
+<body>
+    <!-- <div id="Formu">
+        <input type="text" id="buscador">
+        <input type="hidden" name="page" id="page" value="0">
+        <button id="buscar">Traducir</button>
+    </div>
+    <div id="Resultado"></div>
+
+    <h1>Form</h1>
+    <form action="prosesar" id="form" method="POST">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required><br><br>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+        
+        <label for="mensaje">Mensaje:</label>
+        <textarea id="mensaje" name="mensaje" required></textarea><br><br>
+        
+        <input type="submit" id="send" value="Enviar"> -->
+
+    <!-- </form> -->
+    <h1>Alcoholic drinks</h1>
+    <input type="submit" value="Cargar" id="cargar">
+    <h1 id="text">cosas</h1>
+    <div id="resultado"></div>
+    <script>
+//        $('#buscar').on('click', traducir);
+//        function traducir(){
+//             const settings = {
+// 	async: true,
+// 	crossDomain: true,
+// 	url: 'https://google-translate1.p.rapidapi.com/language/translate/v2',
+// 	method: 'POST',
+// 	headers: {
+// 		'content-type': 'application/x-www-form-urlencoded',
+// 		'Accept-Encoding': 'application/gzip',
+// 		'X-RapidAPI-Key': '664539e83cmsh05e0a07745d4402p17176cjsn594137d31577',
+// 		'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com'
+// 	},
+// 	data: {
+// 		source: 'es',
+// 		target: 'en',
+// 		q: $('#buscador').val(),
+// 	}
+// };
+
+// $.ajax(settings).done(function (response) {
+// 	console.log(response);
+//     $('#Resultado').append(`<p>${response.data.translations[0].translatedText} </p>`)
+// });
+//         }
+//     $('#send').on('click', function(e){
+//         e.preventDefault();
+//         let dataString = $('#form').serialize();
+//         console.log(dataString)
+//     })
+$(document).on('ajaxStart', function(){
+    $('#text').text('cargando');
+}).on('ajaxStop', function(){
+    $('#text').text('');
+})
+$('#cargar').on('click',function(e){
+        e.preventDefault();
+        fetch('https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic').then(resp => {
+        //   debugger
+            if(resp.ok){
+            console.log('llego la respuesta');
+            console.log(resp.json);
+            return resp.json()
+        }
+    }).then(respu =>{
+        console.log(respu);
+        cargarCositas(respu?.drinks)
+        // debugger
+    }).catch(error =>{
+        console.log('hay un error');
+        console.log(error)
+    })
+    })
+    function cargarCositas(array){
+       let content = '';
+        array.forEach(arr =>{
+           content += `<div>
+            <img src="${arr?.strDrinkThumb}">
+            <p>${arr?.strDrink}</p>    
+            </div>`
+        });
+        $('#resultado').append(content);
+    }
+    </script>
+</body>
+</html>
