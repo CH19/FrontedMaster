@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,44 +9,98 @@
     <div>
         <input type="text" id="buscador"> 
         <button id="request">Hacer Peticion</button>
+        <button id="cargar">Cargar</button>
 
-    </div>
+    </div><hr>
   <div id="resultado"></div>  
+  <figure id="loading">
+    <img src="./Spinner-1s-200px.gif" alt="">
+  </figure>
   <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
   <script>
     // Prbando el uso de peticiones ajax 
-    'use strict'
+    'use strict';
     let xhtr = new XMLHttpRequest();
     const request = document.getElementById('request');
     const resultado = document.getElementById('resultado');
     const buscador = document.getElementById('buscador');
 
-    request.onclick = function(){
-        let url = `http://www.omdbapi.com/?apikey=7a711b58&s=${buscador.value}`
-        xhtr.open('get', url);
-        xhtr.send();
-    }
-    xhtr.onreadystatechange = function(){
-       try{
-        if(this.readyState == 4 && this.status == 200){
-            console.log('llego la respuesta');
-            const respuesta = JSON.parse(this.responseText)
-            resultado.innerText = '';
-            if(respuesta.Response == 'True'){
-                console.log(respuesta.Search);
-                respuesta.Search.forEach(titulo =>{
-                    $('#resultado').append(`<p>${titulo.Title}</p>`)
-                })
-                resultado.innerHTML += '<br>'
-                resultado.innerText += respuesta.totalResults + 'resultados';
-            }else{
-                resultado.innerText = 'No hay coincidencias';
-            }
+    // request.onclick = function(){
+    //     let url = `http://www.omdbapi.com/?apikey=7a711b58&s=${buscador.value}`
+    //     xhtr.open('get', url);
+    //     xhtr.send();
+    // }
+    // xhtr.onreadystatechange = function(){
+    //    try{
+    //     if(this.readyState == 4 && this.status == 200){
+    //         console.log('llego la respuesta');
+    //         const respuesta = JSON.parse(this.responseText)
+    //         resultado.innerText = '';
+    //         if(respuesta.Response == 'True'){
+    //             console.log(respuesta.Search);
+    //             respuesta.Search.forEach(titulo =>{
+    //                 $('#resultado').append(`<p>${titulo.Title}</p>`)
+    //             })
+    //             resultado.innerHTML += '<br>'
+    //             resultado.innerText += respuesta.totalResults + 'resultados';
+    //         }else{
+    //             resultado.innerText = 'No hay coincidencias';
+    //         }
+    //     }
+    //    }catch(e){
+    //     resultado.innerText = 'error al procesar los datos';
+    //    }
+    // }
+console.log('hola mundo');
+$('#loading').hide();
+$('#cargar').click(function(){
+    $('#resultado').load('pag2.html')
+})
+
+    $('#request').click(function(){
+        $('#loading').show()
+        // $.ajax({
+        //     url: `http://www.omdbapi.com/?apikey=7a711b58&s=${buscador.value}`,
+        //     type: 'get',
+        //     dataType: 'json',
+        //     success: function(resp){
+        //         const respuestica = resp;
+        //         console.log('llego la respuesta');
+        //         console.log(resp)
+        //         mostrarResultados(resp);
+                
+        //     },
+        //     error: function(xhtr, status){
+        //         alert('peticion no se pudo realizar')
+        //     },
+        //     complete: function(){
+        //         $('#loading').hide();
+        //     }
+
+
+        // })
+        $.getJSON(`http://www.omdbapi.com/?apikey=7a711b58&s=${buscador.value}`, function(resp){
+            mostrarResultados(resp);
+            $('#loading').hide();
+
+        })
+   })
+   function mostrarResultados(respuesta){
+        let respuestaTexto = '';
+        resultado.innerHTML = '';
+        if(respuesta.Response == 'True'){
+            respuesta.Search.forEach(element => respuestaTexto+= `
+            <div>
+                <figure><img src="${element.Poster}" width="150px" height="150px" alt=""></figure>
+                <div>${element.Title}</div>    
+            </div>
+          `);
+            $('#resultado').append(respuestaTexto);
+            $('#resultado').append('<br>');
+            $('#resultado').append(`Total resultados: ${respuesta.totalResults}`);
         }
-       }catch(e){
-        resultado.innerText = 'error al procesar los datos';
-       }
-    }
+
+   }
   </script>
 </body>
 </html>
