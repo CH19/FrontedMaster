@@ -1,0 +1,79 @@
+:root{
+    --SecondaryColor: #004E8A;
+    --PrimaryColor: #f14810;
+    --white: #f2f2f7;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 18px;
+}
+*{
+    
+}
+.container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    width: 100%;
+    & div{
+        width: 100%;
+    }
+}
+.areasEstudio{
+    width: 16rem;
+    height: auto;
+
+}
+.materia-text{
+    background: rgb(222,226,218);
+    background: linear-gradient(90deg, rgba(222,226,218,1) 8%, rgba(229,231,241,1) 90%); 
+    border-radius: 10px;
+}
+.materia-text:hover{
+    cursor: pointer;
+    color: var(--white);
+    background: none;
+    background-color: var(--PrimaryColor);
+    font-weight: bold;
+}
+.datos{
+    width: 20rem;
+}
+
+.curso-codigo{
+    background-color: var(--PrimaryColor);
+    color: var(--white);
+    font-weight: bold;
+    width: fit-content;
+    padding: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+.curso-nombre{
+    display: flex;
+}
+.navegacion{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.navegacion figure img{
+    width: 8rem;
+    height: 8rem;
+}
+.nav-options-container{
+    display: flex;
+    justify-content: space-evenly;
+    width: 60%;
+    font-weight: bold;
+}
+.nav-options{
+    font-size: 14px;
+    
+}
+.nav-options a:hover{
+    color: var(--PrimaryColor);
+}
+.nav-options a{
+    color: var(--SecondaryColor);
+    text-decoration: none;
+}

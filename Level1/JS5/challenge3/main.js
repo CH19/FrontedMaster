@@ -1,6 +1,12 @@
 'use strict';
 $(function(){
     // $('#cargar').on('click', function(){
+    const menuOptions = ['La academia', 'certificacion', 'empleos', 'contacto', 'iniciar sesión'];
+    let contenido = '';
+    menuOptions.forEach(option => {
+        contenido += `<div class="nav-options"><a class="nav-option-a" href="#">${option.toUpperCase()}</a></div>`
+    })
+    $('.nav-options-container').append(contenido);
     fetch('https://api.cadif1.com/areadeestudio')
     .then(response =>{
         if(response.ok) return response.json();
@@ -14,7 +20,11 @@ $(function(){
     })
     $('#cargar').on('click', function(){
     })
+    fetch('https://api.cadif1.com/carrera')
+    .then(resp => {if(resp.ok) return resp.json()})
+    .then(carreras => cargarCarreras(carreras.carreras,'#carreras'));
 })
+// Funcion para cargar las areas de estudio del requerimiento 1 
 function cargarAreas(arr){
     // let content = '';
     // arr.forEach(element =>{
@@ -32,6 +42,7 @@ function cargarAreas(arr){
     })
     
 }
+// Funcion para cargar las diversas areas de estudio 
 function areasEstudio(e){
     //havía un error en colocar el e.id dos veces se tomara nota 
     let url = `https://api.cadif1.com/curso/de_un_area/${e}`;
@@ -44,8 +55,6 @@ function areasEstudio(e){
         
         json?.cursos.forEach(element => {
             $(`#container${element.id}`).on('click', function(){
-                alert('hola');
-                const idActualCursos = element?.id;
                 cargarCurso(element.id);
             })
         })
@@ -58,26 +67,69 @@ function cargarCodigo(arr, container){
     $(container)[0].innerHTML = '';
     $('#datosCurso')[0].innerHTML = '';
     arr.forEach(element =>{
-        content += `<div id="container${element?.id}"><p>${element?.nombre}<p></div>`;
+        content += `<div id="container${element?.id}" class="materia-container"><p class="materia-text">${element?.nombre}<p></div>`;
     })
     $(container).append(content);
 }
 // Funcion para cargar los datos de un curso determinado segun su id 
 function cargarCurso(id){
-    debugger
     console.log(id);
     fetch(`https://api.cadif1.com/curso/${id}`)
     .then(resp => resp.json())
     .then(curso => cargarDatosCurso(curso.curso))
     .catch(error => alert('Error al cargar datos del curso' + error));
 }
+// Funcion para cargar los datos del curso particular 
 function cargarDatosCurso(data){
     let content = '';
-    debugger
+    let content2 = '';
     $('#datosCurso')[0].innerHTML = '';
-    content +=  `<h2><div class="tag">${data.codigo}</div> ${data.nombre}</h2>
+    content +=  `<div class="curso-container">
+    <h2 class="curso-nombre"><div class="curso-codigo">${data.codigo}</div> ${data.nombre}</h2>
     <p>Objetivo: ${data.objetivogeneral}</p>
     <p>Este curso cuenta con ${data.niveles.length} niveles</p> 
+    </div>
     `;
     $('#datosCurso').append(content);
+    data.niveles.forEach((element, index) => {
+         content2 += `<span>${element.nombre}</span>
+    <p>Objetivo principal: <b>${element.objetivosespecificos}</b></p>
+    <p> precio: ${element.precio} </p>
+    `;
+    $('#datosCurso').append(content2);
+
+    })
+}
+function cargarCarreras(carreras, container){
+    let content = '';
+    $(container)[0].innerHTML = '';
+    carreras.forEach(element =>{
+     if(element.activa == '1'){  
+        content += `<div id="container${element?.id}" class="materia-container"><p class="materia-text">${element?.nombre}<p></div>`;
+    }
+    })
+    $(container).append(content);
+    carreras.forEach(carrera => {
+        $(`#container${carrera?.id}`).on('click', function(){
+            cargarDataCarrera(carrera?.id);
+        })
+    })
+}
+function cargarDataCarrera(id){
+    //funcion para documentar y buscar la data de la carrera 
+    fetch(`https://api.cadif1.com/carrera/${id}`)
+    .then(response => {if(response.ok) return response.json()})
+    .then(dataCarrera => MostrarDataCarrera(dataCarrera.carrera))
+    .catch(error => alert(error));
+}
+function MostrarDataCarrera(carrera){
+    // funcion para mostrar los datos de la carrera 
+    $('#descripccionCarreras')[0].innerHTML = '';
+    let content = `
+    <h1><div class="curso-codigo">${carrera.codigo}</div>${carrera.nombre}</h1>
+    <p><b>${carrera.descripcion}</b></p>
+    <p><b>Objetivo:</b>${carrera.objetivo}<p>
+    <p><b>Título:</b>${carrera.titulo}<p>
+    `
+    $('#descripccionCarreras').append(content);
 }

@@ -4,16 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Challenge 3 Christian La Cruz</title>
+    <link rel="stylesheet" href="./syles.css">
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 </head>
 <body>
-    <button id="cargar">Mira la API</button>
-    <div id="areas"></div>
-   <div>
-    <h2 id="areasEstudioTitle"></h2>
-    <div id="areasEstudio"></div>
+    <header>
+        <nav class="navegacion">
+            <figure>
+                <img src="https://cadif1.com/img/template/logo-cadif1.svg" alt="">
+            </figure>
+            <div class="nav-options-container"></div>
+        </nav>
+    </header>
+   <div class="container">
+    <div id="cursos">
+        <h3>Cursos</h3>
+        <div id="areas"></div>
+        <div>
+         <h2 id="areasEstudioTitle"></h2>
+         <div id="areasEstudio" class="areasEstudio"></div>
+        </div>
+        <div id="datosCurso" class="datos"></div>
+       </div>
+       <div id="carrerass">
+        <h3>Carreras</h3>
+        <div id="carreras">
+        </div>
+        <div id="descripccionCarreras"></div>
+       </div>
    </div>
-   <div id="datosCurso"></div>
     <script src="./main.js"></script>
 </body>
 </html>
