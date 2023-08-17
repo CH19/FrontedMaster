@@ -1,5 +1,11 @@
 'use strict';
 $(function(){
+    $('.loading').hide();
+    $(document).on('ajaxStart', function(){
+        $('.loading').show();
+    }).on('ajaxStop', function(){
+        $('.loading').hide();
+    })
     // $('#cargar').on('click', function(){
     const menuOptions = ['La academia', 'certificacion', 'empleos', 'contacto', 'iniciar sesión'];
     let contenido = '';
@@ -26,11 +32,7 @@ $(function(){
 })
 // Funcion para cargar las areas de estudio del requerimiento 1 
 function cargarAreas(arr){
-    // let content = '';
-    // arr.forEach(element =>{
-    //     content += `<div id="container${element?.id}"><p>${element?.nombre}<p></div>`;
-    // })
-    // $('#areas').append(content);
+  
     cargarCodigo(arr, '#areas',)
     arr.forEach(element => {
         $('#container'+element?.id).on('click', function(){
