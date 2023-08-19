@@ -1,6 +1,8 @@
 <script setup>
 // import HelloWorld from './components/HelloWorld.vue'
 import {reactive, ref} from 'vue';
+import headeryt from './components/headeryt.vue';
+import selecciones from './components/selecciones.vue';
 const cliente = reactive({
   Nombre:'CADI F1 C.A.',
   usuario: '@Cadif1AcademiaSoftware',
@@ -39,7 +41,8 @@ function mensaje(m){
 
 <template>
   <div id="BigContainer">
-    <header>
+    <headeryt></headeryt>
+    <!-- <header>
   <nav class="navbar d-flex justify-content-center align-items-center navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <div>
@@ -69,26 +72,9 @@ function mensaje(m){
 
 
 </nav>
-</header>
+</header> -->
 <main>
-  <div class=" container-card mx-0 px-0">
-    <figure>
-      <ion-icon name="home-outline"></ion-icon>
-      <span>Home</span>
-    </figure>
-    <figure>
-      <ion-icon name="play-circle-outline"></ion-icon>
-      <span>Shorts</span> 
-    </figure>
-    <figure>
-      <ion-icon name="briefcase-outline"></ion-icon>
-      <span>Suscripcciones</span>
-    </figure>
-    <figure>
-      <ion-icon name="trash-bin-outline"></ion-icon>
-      <span>Mi biblioteca</span>
-    </figure>
-  </div>
+ <selecciones></selecciones>
   <div class="channel mx-0 px-0">
     <div :style="imagenFondo" class="banner-channel py-0 my-0 bg-inf">
       <div id="enlaces" class="d-flex">
@@ -157,23 +143,7 @@ function mensaje(m){
   height: 500px;
 }
 
-.container-card{
-  border: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-}
-.container-card > figure{
-  display: flex;
-  flex-direction:column;
-  align-items: center;
-  cursor: pointer;
-}
-.container-card > figure > ion-icon {
-  font-size: 2rem;
-  color: black;
-}
+
 .channel-information{
     display: flex;
     justify-content: space-around;

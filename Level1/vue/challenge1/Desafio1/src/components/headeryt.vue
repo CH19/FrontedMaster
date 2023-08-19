@@ -1,15 +1,14 @@
 <script setup>
-
 </script>
 
 <template>
-      <header>
+    <header>
   <nav class="navbar d-flex justify-content-center align-items-center navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <div>
       <a href="#" id="Menu">#</a>
     <a class="navbar-brand" href="#">
-      <img src="./assets/YouTube-Logo.wine.svg" alt="Logo" width="100" height="24" class="d-inline-block align-text-top">
+      <img src="../assets/YouTube-Logo.wine.svg" alt="Logo" width="100" height="24" class="d-inline-block align-text-top">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -34,6 +33,7 @@
 
 </nav>
 </header>
+
 </template>
 
 <style scoped>
