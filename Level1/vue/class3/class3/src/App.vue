@@ -1,5 +1,6 @@
 <script setup>
-import {ref, computed} from 'vue';
+import {ref, computed, reactive} from 'vue';
+import card from './components/productos.vue';
   let users = '';
   // fetch('https://reqres.in/api/users?page=1')
   //     .then(response => {if(response.ok) return response.json()})
@@ -9,42 +10,55 @@ import {ref, computed} from 'vue';
   //       console.log(users)
   //     })
     let number = ref(4);
-
+    const precio = ref(100);
     function MultiplicarNumber(num){
-      number = num * 2
-      return number
+      if(num > 50){
+        mensaje.value = 'Numero Mayor a 50';
+      }else{
+        mensaje.value = 'Numero Menor a 50';
+      }
+      return num * 2
 
     }
-    const multiplicar = computed(()=>{
-      return this.number * 2;
+    const subTotal = computed(()=>{
+      if(number.value > 50){
+        mensaje.value = 'Numero Mayor a 50';
+      }else{
+        mensaje.value = 'Numero Menor a 50';
+      }
+      return number.value * precio.value
     })
-  //   var vm = new Vue({
-  // el: '#example',
-  // data: {
-  //   message: 'Hola'
-  // },
   let mensaje = ref('Hola');
 const   mensajeAlreves = computed(()=>{
-
-    return this.message.split('').reverse().join('')
-  })
+    return mensaje.value.split('').reverse().join('')
+})
+const materias = reactive([
+  'Vue', 'Angular', 'React'
+])
+const MostrarMaterias = computed(()=>{
+  return materias.length > 0 ? 'Tienes materias' : 'No tienes Materias';
+})
 </script>
 
 <template>
-  <h1>Nombres
-  </h1>
   <!-- <div v-for="user in users" :key="user.id">
     <img :src="user.avatar" alt="">
     <p>{{ user.first_name}}</p> -->
 <!-- </div> -->
-<h1>Hola</h1>
 <div id="example">
+  <h1>sdfsdf</h1>
+  <input type="text" v-model="mensaje">
   <p>Mensaje original: "{{ mensaje }}"</p>
-  <p>Mensaje invertido computado: "{{ }}"</p>
-</div>
+  <p>Mensaje invertido computado: "{{ mensajeAlreves }}"</p>
 
-<p>{{ number }}</p>
-<button @click="multiplicar">hola</button>
+  <input type="number" v-model="number">
+<p><span>Cantidad de Productos</span>{{ number }}</p>
+<p>Precio: {{ precio }}</p>
+<p>subtotal: {{ subTotal }}</p>
+<hr>
+<h3>{{ MostrarMaterias }}</h3>
+<card></card>
+</div>
 </template>
 
 <style scoped>

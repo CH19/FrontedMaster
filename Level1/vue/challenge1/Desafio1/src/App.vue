@@ -23,10 +23,10 @@ const enlaces = ref([{
   enlace: 'https://www.instagram.com/cadif1/'}
 ]);
 const opccionesCanal = ['Pagina principal', 'Videos', 'Short', 'En vivo', 'Listas de Reproducción', 'Comunidad', 'Canales', 'Información']
-const imagenFondo = {'background-image': `url(${cliente.imgBanner})`}
-const busqueda = ref('')
+const imagenFondo = {'backgroundImage': `url(${cliente.imgBanner})`};
+const busqueda = ref('');
 const Logo = cliente.imgLogo;
-let itsBotonClicked = ref(false)
+let itsBotonClicked = ref(false);
 // Boton funcionalidad
 function aldarClick(){
   itsBotonClicked.value = !itsBotonClicked.value;
@@ -38,7 +38,8 @@ function mensaje(m){
 </script>
 
 <template>
-<header>
+  <div id="BigContainer">
+    <header>
   <nav class="navbar d-flex justify-content-center align-items-center navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <div>
@@ -140,6 +141,7 @@ function mensaje(m){
   <h1>{{ busqueda }}</h1>
 </main>
 
+  </div>
 </template>
 
 <style scoped>
