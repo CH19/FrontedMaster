@@ -152,19 +152,7 @@ const app = Vue.createApp({
             text: "Accede a tu cuenta",
             open: false,
             username: "",
-            posts: [{
-                title: "Titulo 1",
-                description: "Lorem ipsum..."
-            }, {
-                title: "Titulo 2",
-                description: "Lorem ipsum..."
-            }, {
-                title: "Titulo 3",
-                description: "Lorem ipsum..."
-            }, {
-                title: "Titulo 4",
-                description: "Lorem ipsum..."
-            }]
+       
         };
     },
     watch: {
@@ -188,32 +176,52 @@ const app = Vue.createApp({
     //html
     template: ` 
     <div class="container" :class="styles">
-        <h2>{{ text }}</h2>
-        <div v-if="open">
-            <p>Hola, {{ username }}</p>
-              <item v-for="(item, i) in posts"></item>
-              </div>
+    <h2>{{ text }}</h2>
+    <div v-if="open">
+        <p>Hola, {{ username }}</p>
+        <items></items>
+        </div>
 
-        </div>
-        <div v-else>
-            <div>Username</div>
-            <input type="text" v-model="username" />    
-        </div>
-        <button @click="open = !open">
-            <div v-if="!open">Acceder</div>
-            <div v-else>Salir</div>
-        </button>
+  
+    <div v-else>
+        <div>Username</div>
+        <input type="text" v-model="username" />    
     </div>
+    <div>
+    <button @click="open = !open">
+        <div v-if="!open">Acceder</div>
+        <div v-else>Salir</div>
+    </button>
+    </div>
+</div>
     `
    
 });
 app.component('items',{
+    data() {
+        return {
+            posts: [{
+                title: "Titulo 1",
+                description: "Lorem ipsum..."
+            }, {
+                title: "Titulo 2",
+                description: "Lorem ipsum..."
+            }, {
+                title: "Titulo 3",
+                description: "Lorem ipsum..."
+            }, {
+                title: "Titulo 4",
+                description: "Lorem ipsum..."
+            }]
+        }
+    },
     template: `
     <div class="list">
 
-    <div v-for="(item, i) in posts" :key="i" class="item">
+    <div v-for="(item, i) in posts" :key="i" class="item1">
     <div class="title">{{ item.title }}</div>
     <p>{{ item.description }}</p>
+    </div>
 </div>
 
     `
