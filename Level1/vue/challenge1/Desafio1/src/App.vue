@@ -3,6 +3,7 @@
 import {reactive, ref} from 'vue';
 import headeryt from './components/headeryt.vue';
 import selecciones from './components/selecciones.vue';
+import videos from './components/videos.vue'
 const cliente = reactive({
   Nombre:'CADI F1 C.A.',
   usuario: '@Cadif1AcademiaSoftware',
@@ -126,7 +127,7 @@ function mensaje(m){
   </div>
   <h1>{{ busqueda }}</h1>
 </main>
-
+  <videos></videos>
   </div>
 </template>
 
@@ -151,9 +152,11 @@ function mensaje(m){
 }
 .channel-information figure{
   padding: 20px;
-  & img{
-    border-radius: 20px;
-  }
+ 
+}
+.channel-information figure img{
+  border-radius: 20px;
+  
 }
 .content{
   width: 800px;
@@ -186,8 +189,9 @@ main{
   bottom: 10px;
   right: 0;
   padding: 20px;
-  & figure{
-    padding: 10px;
-  }
+}
+#enlaces figure{
+  padding: 10px;
+
 }
 </style>

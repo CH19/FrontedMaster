@@ -185,7 +185,8 @@ const app = Vue.createApp({
             return this.open ? ['open'] : ['closed'];
         }
     },
-    template: `
+    //html
+    template: ` 
     <div class="container" :class="styles">
         <h2>{{ text }}</h2>
         <div v-if="open">
@@ -204,18 +205,18 @@ const app = Vue.createApp({
         </button>
     </div>
     `
+   
+});
+app.component('items',{
+    template: `
+    <div class="list">
 
-    app.component('item',{
-        template: `
-        <div class="list">
+    <div v-for="(item, i) in posts" :key="i" class="item">
+    <div class="title">{{ item.title }}</div>
+    <p>{{ item.description }}</p>
+</div>
 
-        <div v-for="(item, i) in posts" :key="i" class="item">
-        <div class="title">{{ item.title }}</div>
-        <p>{{ item.description }}</p>
-    </div>
-
-        `
-    })
+    `
 });
 // separar el contenido de la app del despliegue de la app 
 const vm = app.mount("#app");
