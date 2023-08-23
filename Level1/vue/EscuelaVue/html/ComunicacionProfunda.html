@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <title>Comunicacion Profunda de componentes</title>
+</head>
+<body>
+    <!-- Comunicación profunda entre componentes de Vue  -->
+    <div id="app">
+
+    </div>
+    <script>
+        const app = Vue.createApp({
+            template: `
+            <h1>{{name}}</h1>
+            <presentaciones></presentaciones>
+            <v-button :label="buttonText" />
+            `,
+            data() {
+                return {
+                    name: 'Aplicacion el gusdalito',      
+                    buttonText: 'Presiona aqui',  
+                }
+            },
+            provide: {
+                texto: 'Hola como estas',
+            }
+
+        });
+        app.component('presentaciones', {
+            template: `
+            <datos />
+            `
+        });
+       app.component('datos', {
+        inject: ['texto'],
+        template: `
+        <h1>{{texto}}</h1>
+        `
+       });
+       app.component('v-button', {
+        props: ['label'],   
+        template: `<button>{{label}}</button>`        
+       })
+        const vm = app.mount('#app');
+        // Instancia de componentes 
+        console.log(vm.$el);
+
+    </script>
+</body>
+</html>
