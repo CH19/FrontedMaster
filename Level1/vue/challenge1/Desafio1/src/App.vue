@@ -13,18 +13,6 @@ const cliente = reactive({
    imgLogo: 'https://yt3.googleusercontent.com/ytc/AOPolaSKpYFNhsdiuWA5_g_5wtvx-FDkp8Anl7Zy3UPQ=s176-c-k-c0x00ffffff-no-rj',
    imgBanner:'https://yt3.googleusercontent.com/VKIQ_KxkTb21Xo3zDFcnPkMWe3_gYVH5Ey_TMbGwkKYmZdsGS5GTVCAQ7g-6HVpkhK8hPSmSNw=w1707-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj',
 });
-const enlaces = ref([{
-    logo: './assets/Img/Cadif1-Logo.svg',
-    enlace: 'https://cadif1.com/',
-  }
-  ,{
-  logo:'<ion-icon name="logo-facebook"></ion-icon>',
-  enlace: 'https://www.facebook.com/cadif1'
-},
-,{
-  logo: '<ion-icon name="logo-instagram"></ion-icon>',
-  enlace: 'https://www.instagram.com/cadif1/'}
-]);
 const opccionesCanal = ['Pagina principal', 'Videos', 'Short', 'En vivo', 'Listas de Reproducción', 'Comunidad', 'Canales', 'Información']
 const imagenFondo = {'backgroundImage': `url(${cliente.imgBanner})`};
 const busqueda = ref('');
@@ -43,37 +31,6 @@ function mensaje(m){
 <template>
   <div id="BigContainer">
     <headeryt></headeryt>
-    <!-- <header>
-  <nav class="navbar d-flex justify-content-center align-items-center navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <div>
-      <a href="#" id="Menu">#</a>
-    <a class="navbar-brand" href="#">
-      <img src="./assets/YouTube-Logo.wine.svg" alt="Logo" width="100" height="24" class="d-inline-block align-text-top">
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    </div>
-    <div id="Buscador" class="btn-group">
-      <input type="text" class="form-control ">
-      <button style="border: none;">      <a class="text-dark"  style="text-decoration: none;" href=""><ion-icon name="search-outline"></ion-icon></a></button>
-      <a class="btn" href="">      <ion-icon name="mic-outline"></ion-icon>
-</a>
-    </div>
-
-    <div class="fiugre-container">
-      <a class="btn" href="#" ><ion-icon name="videocam-outline"></ion-icon></a>      
-      <a class="btn" href="" ><ion-icon name="notifications-outline"></ion-icon></a>
-      <figure porfileFoto>
-        <img :src="clienteimgLogo" alt="">
-      </figure>
-    </div>
-  </div> 
-
-
-</nav>
-</header> -->
 <main>
  <selecciones></selecciones>
   <div class="channel mx-0 px-0">
@@ -127,7 +84,7 @@ function mensaje(m){
   </div>
   <h1>{{ busqueda }}</h1>
 </main>
-  <videos></videos>
+<videos></videos>
   </div>
 </template>
 

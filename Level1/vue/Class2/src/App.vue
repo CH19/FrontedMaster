@@ -6,6 +6,9 @@ const NavbarWords = ref(['Pokemon data', 'Game mechanics', 'Pokemon Games', 'Com
 const preferencias = ref(['water', 'fire', 'electric', 'tierra', 'aire'])
 const hombre = ref('hola como estas');
 const ciudad = ref('');
+let Booleano1 = (ref(''));
+console.log(Booleano1.value);
+console.log(Boolean(Booleano1.value));
 let elecciones = ref(['']);
 const generos = ref('masculino', 'femenino');
 const sexo = ref('');
@@ -30,7 +33,10 @@ function evitarCopiar(e){
 </script>
 
 <template>
-  <header>
+<div>
+  <button disabled>Boton desactivado</button>
+</div>
+<!-- <header>
    <div id="sub-Header" @click.stop.prevent="mensaje('holi')">
     <div class="menu-item" @click.stop="mensaje(word)" v-for="word in NavbarWords" :key="word"><a href="">{{ word }}</a>
     </div>
@@ -42,7 +48,7 @@ function evitarCopiar(e){
   </header>
   <main>
   <input @keyup.left.right.exact="alert('hola mundo')" v-model="hombre"  type="text" >
-  <button @click="logueado = !logueado" @keyup.up="contador++" @keyup.down="contador--">{{ contador }}</button>
+  <button @click="logueado = !logueado" disabled="false" @keyup.up="contador++" @keyup.down="contador--">{{ contador }}</button>
 </main>
 <div v-if="logueado">
   <h1>{{ hombre }}</h1>
@@ -53,21 +59,18 @@ function evitarCopiar(e){
   <option value="Caracas">Caracas</option>
 </select>
 <div>
-  <!-- preferencias -->
+  preferencias
   <div v-for="pref in preferencias" :key="pref">
     <label :for="pref">{{ pref }}</label>
     <input type="checkbox" :value="pref" :name="pref" :id="pref" v-model="elecciones">
   </div>
   <div>{{ elecciones }}</div>
 </div>
-<div>
-  <div v-for="genero in generos">
-    <label :for="genero">{{ genero }}</label>
-    <input type="checkbox" name="sexo" :value="genero" :id="genero" v-model="sexo">
-  </div>
-  {{ sexo }}
+
+<div :id="Booleano1" :class="Booleano1">
+  <h1 v-for="n in 10" :key="n">Booleano1</h1>
 </div>
-</div>
+</div> -->
 </template>
 
 <style scoped>

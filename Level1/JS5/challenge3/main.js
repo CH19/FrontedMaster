@@ -11,7 +11,7 @@ $(function(){
     let contenido = '';
     menuOptions.forEach(option => {
         contenido += `<div class="nav-options"><a class="nav-option-a" href="#">${option.toUpperCase()}</a></div>`
-    })
+    });
     $('.nav-options-container').append(contenido);
     fetch('https://api.cadif1.com/areadeestudio')
     .then(response =>{
@@ -29,7 +29,7 @@ $(function(){
     fetch('https://api.cadif1.com/carrera')
     .then(resp => {if(resp.ok) return resp.json()})
     .then(carreras => cargarCarreras(carreras.carreras,'#carreras'));
-})
+});
 // Funcion para cargar las areas de estudio del requerimiento 1 
 function cargarAreas(arr){
   

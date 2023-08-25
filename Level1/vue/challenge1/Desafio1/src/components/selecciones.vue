@@ -27,22 +27,6 @@
         <a href="#" v-html="menu.icon" class="icon"></a>
         <span>{{ menu.title }}</span>
     </figure>
-    <!-- <figure>
-      <ion-icon name="home-outline"></ion-icon>
-      <span>Home</span>
-    </figure>
-    <figure>
-      <ion-icon name="play-circle-outline"></ion-icon>
-      <span>Shorts</span> 
-    </figure>
-    <figure>
-      <ion-icon name="briefcase-outline"></ion-icon>
-      <span>Suscripcciones</span>
-    </figure>
-    <figure>
-      <ion-icon name="trash-bin-outline"></ion-icon>
-      <span>Mi biblioteca</span>
-    </figure> -->
   </div>
 
 </template>
