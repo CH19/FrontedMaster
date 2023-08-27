@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- proyecto con next 
+npx create-next-app@latest nextjs-app --use-npm --example ``https://github.com/vercel/next-learn/tree/master/basics/learn-starter``  -->
+<body>
+    <div id="root"></div>
+
+    <!-- Scripts de React  -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+     
+    <!-- Scripts de Babel  -->
+    <script src="http://unpkg.com/@babel/standalone/babel.min.js"></script> 
+
+    <script src="./main.js"></script>
+
+    <script>
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<h1> Hola mundo</h1>);
+    </script>
+</body>
+</html>

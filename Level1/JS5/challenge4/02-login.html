@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Title</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS v5.2.1 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+</head>
+    <style>
+        body{
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items:center;
+        }
+    </style>
+
+<body>
+  <header>
+    <!-- place navbar here -->
+  </header>
+  <main>
+    <div>
+        <a href="#" id="iniciar">Iniciar Sesion</a>
+        <a href="#" id="verDatos">Ver datos</a>
+        <a href="#" id="Registrarse">Registrarse</a>
+    </div>
+    <div>
+        <h1 id="mensaje"></h1>
+        <form action="" id="formRegistro">
+            <label for="" class="form-label">User<input name="username" type="text" class="form-control"></label>
+            <label for="" class="form-label">Passowrd<input name="passowrd" type="password" class="form-control"></label>
+            <button type="submit" id="registrarDatos">Registrar</button>
+        </form>
+    </div>
+  
+    <form action="" id="formIniarSesion">
+        <label for="" class="form-label">User<input name="username" type="text" class="form-control"></label>
+        <label for="" class="form-label">Passowrd<input name="passowrd" type="password" class="form-control"></label>
+        <button type="submit" id="iniciarSesion">Iniciar Sesion</button>
+    </form>
+    
+  </main>
+  <footer>
+    <!-- place footer here -->
+  </footer>
+  <!-- Bootstrap JavaScript Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+  </script>
+
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+<script>
+    // @ts-check
+'use strict';
+    $(function(){
+        const urlBase = 'https://mystoreapi.com';
+        $('#mensaje').text('Registro usuario');
+        $('#formIniarSesion').hide();
+        $('#Registrarse').hide();
+        const formRegister = $('#formRegistro')[0];
+        const formIniciarSesion = $('#formIniarSesion')[0];
+        $('#iniciar').on('click', CambiarForm);
+        $('#Registrarse').on('click', CambiarRegistrarse);
+        $('#registrarDatos').on('click', (event)=>{
+            event.preventDefault();
+            const formudata = new FormData(formRegister);
+            console.log(formudata);
+            for (const value of formudata.values()) {
+                if(value == undefined || value == null || value == '')
+                    alert('Campo vacio por favor rellenear');
+                else
+                    break;
+            }
+            fetch(urlBase+'/auth/user',{
+                method: 'POST',
+                body: formudata,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(response => {
+                if(response.ok) console.log('Registro exitoso');
+                else console.error('error');
+            }).catch(error => console.error(error))
+        });
+        $('#iniciarSesion').on('click', (event)=>{
+            const formudata2 = new FormData(formIniciarSesion);
+            for (const value of formudata2.values()) {
+                if(value == undefined || value == null || value == '')
+                    alert('Campo vacio por favor rellenear');
+                else
+                fetch(urlBase+'auth/login',{
+                    method : 'POST',
+                    body : formudata2,
+                    headers: {
+                    'Content-Type': 'application/json'
+                }                   
+                }).then(function(response){
+                    if (response.ok){
+                        return response.json()
+                    }
+                }).then(function(json){
+                    if (json){
+                        localStorage.setItem('mystoreToken', json.access_token)
+                        console.log('Login con extio')
+                    }
+                }).catch(function(error){
+                    console.log(error)
+                    window.alert('Usuario o contraseña incorrecto')
+                })
+            };
+        })
+        $('#verDatos').on('click', MostrarDatos);
+});
+
+function CambiarRegistrarse(){
+    $('#mensaje').text('Registrarse');
+    $('#formIniarSesion').hide();
+    $('#formRegistro').show()
+    $('#Registrarse').hide();
+
+    $('#iniciar').show()
+
+}
+
+function MostrarDatos(){
+    if (localStorage.mystoreToken){
+                fetch('https://mystoreapi.com/auth/me',{
+                    method : 'get',
+                    mode : 'cors',
+                    headers : {
+                        Authorization : localStorage.mystoreToken
+                    }
+                }).then(function(response){
+                    return response
+                }).then(function(response){
+					console.log(response)
+                    // se pensaba maquetar en mostrar datos que la funcion pusiera texto en un div, pero no se puede consultar exactamente los datos de la respuesta asi que  se omitira por ahora 
+                }).catch(error => console.log(error));
+            }else{
+                console.log('error');
+            }
+}  
+function CambiarForm(){
+    $('#mensaje').text('Iniciar Sesion');
+    $('#iniciar').hide()
+    $('#formIniarSesion').show();
+    $('#formRegistro').hide()
+    $('#Registrarse').show();
+
+}
+
+</script>
+</body>
+
+</html>

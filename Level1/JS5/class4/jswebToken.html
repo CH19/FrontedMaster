@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Inicio de sesión</h1>
-    <form id="inicio-sesion">
+    <form id="inicioSesion">
         Usuario <input type="text" name="username">
         Clave <input type="password" name="password">
         <input type="button" id="btnIniciarSesion">
@@ -18,13 +18,14 @@
 https://cdn.jsdelivr.net/npm/sweetalert2@11
 "></script>
     <script>
-        let clientId = "3f7f8c73a542c5e3601e279682c6e5dafcef6f5a";
+        // @ts-check
+let clientId = "3f7f8c73a542c5e3601e279682c6e5dafcef6f5a";
         let urlBase = "https://core.kpimetro.com/desarrollo/";
 
         $("#btnIniciarSesion").click(()=>{
             fetch(urlBase+"login",{
                 method:"post",
-                body: new FormData($("#inicio-sesion")),
+                body: new FormData($("#inicioSesion").val()),
                 headers:{
                     "client_id":clientId
                 }

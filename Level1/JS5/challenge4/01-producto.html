@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Registrar Producto </title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS v5.2.1 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+</head>
+
+<body>
+  <!-- "name": "string",
+  "price": 0,
+  "manufacturer": "string",
+  "category": "string",
+  "description": "string",
+  "tags": "string" -->
+  <main>
+ <!-- <button id="btn1">Obtener categorias</button> -->
+    <h1>Registrar Producto </h1>
+    <form id="registrarProducto">
+          <label for="Inputname1" class="form-label">name</label>
+          <input type="text" required name="name" class="form-control" id="Inputname1" aria-describedby="nameHelp">
+            <label for="Inputprice1" class="form-label">price</label>
+            <input type="number" name="price" min="0" class="form-control" id="Inputprice1" aria-describedby="priceHelp">
+            <label for="Inputmanufacture1" class="form-label">manufacture</label>
+            <input type="text" name="manufacturer" class="form-control" id="Inputmanufacture1" aria-describedby="manufactureHelp">
+            <label for="category">category</label>
+            <select name="category" id="category">
+            </select>
+            <br>
+          <label for="Inputdescription1" class="form-label">description</label>
+          <input type="text" name="description"  class="form-control" id="Inputdescription1">
+            <label for="Inputtags1" class="form-label">tags</label>
+            <input type="text" name="tags" class="form-control" id="Inputtags1">
+        <button type="submit" id="subirProducto" class="btn btn-primary">Registrar Producto</button>
+      </form>
+  </main>
+  <!-- Bootstrap JavaScript Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+  integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+  </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+  </script>
+<!-- <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script> -->
+
+
+<script>
+  // @ts-check
+'use strict';
+const urlBase = 'https://mystoreapi.com'
+$(function(){
+    let formu = $('#registrarProducto')[0];
+    console.log(formu);
+            fetch(`${urlBase}/catalog/categories`)
+            .then(response => {
+                if(response.ok) return response.json();
+            }).then(json => {
+                console.log(json);
+                // se verifica que las cateogiras sean palabras reales 
+                const categorias = json.categories.filter(element => element.category != null && element.category != undefined && element.category.length > 2)
+                console.log(categorias);
+                categorias.forEach(element => {
+                        $('#category').append(`<option value=${element.category}>${element.category}</option>`)
+                    
+                });
+            })
+            .catch(error => console.error(error));
+
+            // let cosita = Object.entries(form);
+            // console.log(cosita);            
+            if(formu){
+              $('#subirProducto').on('click',(event)=>{
+                event.preventDefault();
+                let form = new FormData(formu);
+                for (const value of form.values()) {
+                  if(value == null || value == undefined || value == '' )
+                    alert('casilla vacia rellene nuevamente');
+                  // hubiera querido hacer una estrucutra de validacion compleja con expresiones regulares y asi 
+                    // return
+                }
+                // no se hace un condicional aqui ni nada porque se sobre entiende que si hay una casilla vacia el programa dara error y la peticion no se hara por lo tanto el usuario tendrá que internalizar la causa y mejorar 
+            const addProducts = '/catalog/product'
+            fetch(urlBase+addProducts,{
+                method: 'POST',
+                mode: 'cors',
+                body: JSON.stringify(form),
+                headers: {
+                    'content-type': 'application/json',
+                }  .then((result)=>{
+                console.log(result)
+                if (result.ok){
+                    return result.json();
+                }else{
+                    // error 
+                }
+            }).then((json)=>{
+                if (json.OK){
+                    console.log("se registro exitosamente");
+                    $('#registrarProducto input').val(''); 
+                    alert('Registro Exitoso');
+                }else{
+                    console.log('hay un error de registro en el producto');
+              }      
+            })
+            .catch((error)=>{
+                console.log("error de comunicacion")
+                console.error(error);
+            })
+            })
+        })
+    }
+});
+
+
+</script>
+</body>
+
+</html>
