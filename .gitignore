@@ -30,3 +30,8 @@ coverage
 *.zip
 .node_modules
 node_modules
+
+# TypeScript files 
+tsconfig.json
+package.json
+package-lock.json
