@@ -78,4 +78,5 @@ Level2/React/desafio1/public/vercel.svg
 Level2/React/desafio1/public/favicon.ico
 Level2/React/desafio1/.nvmrc
 
-
+# archvivos json 
+*.json
