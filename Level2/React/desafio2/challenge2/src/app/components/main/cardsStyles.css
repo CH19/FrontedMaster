@@ -1,0 +1,96 @@
+/* <div className="card-container">
+<div className="card-header">
+<div className="cad-information">
+  <figure className="card-porfile-photo"><img src={user.imgFeed} alt=""></img></figure>
+  <span className="card-username">{user.nameAccount}</span>
+  <a href="linkFeed" className="card-link">{user.linkFeed}</a>
+  </div>
+  <div className="card-timer"><span>{user.timestamp}</span></div>
+</div>
+<div className="card-body">
+  <span>{user.description}</span>
+  <figure className="card-photo"><img src={user.imgFeed} alt=""></img></figure>
+</div>
+<div className="card-footer">{user.likes}</div>
+</div> */
+:root{
+  --white: #FFF;
+}
+
+.main{
+  width: 100vw;
+  height: fit-content;
+  align-items: center;
+  justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+}
+.card-container{
+  width: 30em;
+  background-color: whitesmoke;
+  border-radius: 20px;
+  border: 1px solid black;
+  margin: 15px 0;
+}
+.card-header{
+    display: flex;
+    justify-content: space-between;
+}
+.cad-information{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+.card-childs{
+  display: flex;
+  flex-direction: column;
+}
+.card-porfile-photo{
+  width: 4em;
+  height: 4em;
+  padding: 5px;
+}
+.card-porfile-photo img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 50px;
+}
+.card-body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.card-photo{
+  width: fit-content;
+  height: fit-content;
+}
+.card-photo img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 20px;
+}
+.card-footer{
+  display: flex;
+  height: fit-content;
+  margin: 0 1.5em;
+  flex-direction: row;
+  gap: 5px;
+}
+.card-footer figure{
+  display: flex;
+  font-size: .7em;
+  gap: 5px;
+  flex-direction: column;
+
+}
+.login-error{
+  padding: 0.3em;
+  background-color: tomato;
+  color: var(--white);;
+  text-align: center;
+  border: 1px solid red;
+}
