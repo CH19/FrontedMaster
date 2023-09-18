@@ -32,7 +32,7 @@
 // canvas para la creacion del edificio 
 
 // import Two from 'two.js'
-import { randomColor, randomNumber } from "./funciones";
+// import { randomColor, randomNumber } from "./funciones
 const two3 = new Two({
     fullscreen: false,
     width: canvas?.height + 300,
@@ -42,9 +42,9 @@ const two3 = new Two({
 // se obtiene el id del div planteado en el html para ser el contenedor del edificio 
 const edificioContainer = document.getElementById('edificio');
 // se hereda con two.appento el canvas del objeto two en el div edificio 
-two3.appendTo(main);
+two3.appendTo(edificioContainer);
 // se obtiene la data del canvas para ponerle una clase e interactuar mas con el 
-const edificio = document.getElementsByTagName('canvas')[2];
+const edificio = document.getElementsByTagName('canvas')[0];
 edificio.classList.add('edificio');
 // se crea la lase abstracta figura con el metodo pintar
 abstract class Figura{
@@ -79,7 +79,8 @@ class Ventana extends Figura{
         //     ventanas.add(ventana);
 
         // }    
-        two3.makePolygon(this.postionX, this.positionY, this.tamanno, 4 );
+        const ventanita = two3.makePolygon(this.postionX, this.positionY, this.tamanno, 4 );
+        ventanita.fill = 'red';
         two3.update()
     }
 }
@@ -107,16 +108,18 @@ class Piso extends Figura{
 
         const pisito = two3.makeRectangle(this.posicionX, this.posicionY, this.ancho, Piso._alto);
         pisito.fill = this.color
-        let position = Piso.alto
+        // let position = Math.sqrt((Piso.alto / 2))
+        let position = 0;
         let cantidad = this.ancho * .12
-        console.log('ancho',this.ancho);
+        console.log('ancho',Math.sqrt(Piso.alto));
         // se utiliza el ciclo for para crear una nueva ventana dependiendo del numero seleccionado 
         for (let index = 0; index < this.nroVentanas; index++) {
             
             const ventana2 = new Ventana(position, this.posicionY, Piso.alto);
+            
             position += 100;
         }
-        const ventana = new Ventana(100, this.posicionY, Piso.alto);
+        // const ventana = new Ventana(, this.posicionY, Piso.alto);
 
         console.log(this.ancho);
         two3.update()
@@ -143,3 +146,17 @@ class Piso extends Figura{
     piso.pintar();
     // Ventana.pintar()
 })()
+
+function randomNumber(min: number, max:number){
+    return Math.floor(Math.random() * (max - min + 1 ) + min);
+}
+ function randomColor(){
+    // let colors = ['pink','gray', 'orange', 'blue', 'red', 'lightblue', 'purple', 'bisque', 'green', 'lightgreen', 'yellow', 'brown']
+    // return colors[Math.floor(Math.random() * colors.length)]
+    const letters: string = '0123456789ABCDEF';
+    let color:string = '#';
+    for (let index = 0; index < 6; index++) {
+    color += letters[Math.floor(Math.random() * (letters.length - 1))]        
+    }
+    return color
+}

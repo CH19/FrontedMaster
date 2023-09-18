@@ -2,11 +2,19 @@
    display: flex;
 }
 #main{
-    /* display: flex;
-    position: relative; */
+    display: flex;
+    position: relative;
+    align-items: flex-end;
+    height: 100vh;
+}
+#edificio{
+    display: flex;
+    height: 100vh;
+    justify-content: flex-end;
 }
 .edificio{
     background-color: red;
+    
    /* position: absolute;
    right: 0;
    top: -4rem;*/

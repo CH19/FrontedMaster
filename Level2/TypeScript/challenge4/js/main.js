@@ -2,7 +2,6 @@
 // 1.- Crear una clase con el nombre Ventana que herede de la clase Figura, que tenga los atributos: tamaño (number), conMarco (boolean), luzEncendida (boolean). Sobre escribir el método "pintar", que debe pintar la ventana en la posición X,Y que tenga. El ancho y el alto se debe conseguir usando el atributo tamaño. El color de fondo dependerá de si la luz esta encendida (amarillo) 
 // o no (negro). Si el atributo conMarco es true, la ventana debe tener un marco, de lo contrario no. En el constructor los valores de
 //  los atributos "conMarco" y "luzEncendida" son opcionales y deben asignarse aleatoriamente si no se reciben
-Object.defineProperty(exports, "__esModule", { value: true });
 // 2.- Crear una clase con el nombre Piso que herede de la clase Figura, que tenga el atributo nroVentanas (number), ancho (number) y 
 // alto (number). El alto debe ser un atributo Static y constante. En el constructor se debe recibir por parámetro el ancho, el color, 
 // la posición X,Y, pero el atributo nroVentanas debe ser un número aleatorio. Sobre escribir el método "pintar", que debe pintar un 
@@ -25,7 +24,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // Se inicializa el objeto Two en este caso two3 porque es el tercero creado para obtener todos los metodos de Two.js incluyendo la creacion de un
 // canvas para la creacion del edificio 
 // import Two from 'two.js'
-const funciones_1 = require("./funciones");
+// import { randomColor, randomNumber } from "./funciones
 const two3 = new Two({
     fullscreen: false,
     width: (canvas === null || canvas === void 0 ? void 0 : canvas.height) + 300,
@@ -35,9 +34,9 @@ const two3 = new Two({
 // se obtiene el id del div planteado en el html para ser el contenedor del edificio 
 const edificioContainer = document.getElementById('edificio');
 // se hereda con two.appento el canvas del objeto two en el div edificio 
-two3.appendTo(main);
+two3.appendTo(edificioContainer);
 // se obtiene la data del canvas para ponerle una clase e interactuar mas con el 
-const edificio = document.getElementsByTagName('canvas')[2];
+const edificio = document.getElementsByTagName('canvas')[0];
 edificio.classList.add('edificio');
 // se crea la lase abstracta figura con el metodo pintar
 class Figura {
@@ -78,7 +77,7 @@ class Ventana extends Figura {
 class Piso extends Figura {
     constructor(posicionX, posicionY, ancho, color) {
         super();
-        this._nroVentanas = (0, funciones_1.randomNumber)(1, 10);
+        this._nroVentanas = randomNumber(1, 10);
         this.ancho = 0;
         this.posicionX = 0;
         this.posicionY = 0;
@@ -91,7 +90,8 @@ class Piso extends Figura {
     pintar() {
         const pisito = two3.makeRectangle(this.posicionX, this.posicionY, this.ancho, Piso._alto);
         pisito.fill = this.color;
-        let position = Piso.alto;
+        // let position = Math.sqrt((Piso.alto / 2))
+        let position = 0;
         let cantidad = this.ancho * .12;
         console.log('ancho', this.ancho);
         // se utiliza el ciclo for para crear una nueva ventana dependiendo del numero seleccionado 
@@ -99,7 +99,7 @@ class Piso extends Figura {
             const ventana2 = new Ventana(position, this.posicionY, Piso.alto);
             position += 100;
         }
-        const ventana = new Ventana(100, this.posicionY, Piso.alto);
+        // const ventana = new Ventana(, this.posicionY, Piso.alto);
         console.log(this.ancho);
         two3.update();
     }
@@ -125,3 +125,16 @@ Piso._alto = 60;
     piso.pintar();
     // Ventana.pintar()
 })();
+function randomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
+function randomColor() {
+    // let colors = ['pink','gray', 'orange', 'blue', 'red', 'lightblue', 'purple', 'bisque', 'green', 'lightgreen', 'yellow', 'brown']
+    // return colors[Math.floor(Math.random() * colors.length)]
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let index = 0; index < 6; index++) {
+        color += letters[Math.floor(Math.random() * (letters.length - 1))];
+    }
+    return color;
+}

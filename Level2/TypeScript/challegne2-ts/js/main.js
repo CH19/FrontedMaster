@@ -170,7 +170,6 @@ canv.onclick = (event) => {
     // }
     vertexGroup.add(vertex);
 };
-two.play();
 class Tren {
     constructor(nombre) {
         this._nombre = 'tren';

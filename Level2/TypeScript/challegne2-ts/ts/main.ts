@@ -187,7 +187,6 @@ canv.onclick = (event)=>{
     // }
     vertexGroup.add(vertex)
 }
-two.play();
 
 class Tren {
     private _nombre : string = 'tren';
