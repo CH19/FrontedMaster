@@ -1,4 +1,193 @@
+// Para este desafio se quiso probar algo diferente en ves de generar las estrellas con los metodos nativos de canvas, me tome el atrevimiento
+// de usar una libreria de javascript externa para interactuar con el canvas (Two.js  https://two.js.org/), creame que fue bastante dificil como principiante aprender a implementarla
+// y quizas me genero las estrellas de una forma mas perfecta y facil que si las hubiera hecho a mano pero me costo bastante saber como funcionaba y como implementar las formas, en fin
+// lo quise tambien hacer para retarme a mi mismo y ver mi capacidad de ser auodidacta, espero que le impresione tanto como a miTren
+
+// Pd: el motivo por el que hay dos canvas es porque la libreria de Two.js para trabajar con canvas crea nativamente el suyo asi que para no complicarme la Vida 
+// en hacer una migracion simplemente lo acomode con absolute sobre el, espero que no haya problemitas+
+
+
+// Dependencias usadas
+// Typescript
+// .bin 
+// two.js 
+
 const canvas: HTMLCanvasElement | null = document.getElementById('tren');
+
+// import Two from 'two.js'
+
+// metodo para crear el objeto two 
+const two = new Two({
+    fullscreen: false,
+    width: canvas?.width,
+    height: canvas?.height,
+    type: Two.Types.canvas,
+})
+
+// se hereda el two de un contenedor 
+const main = document.getElementById('main');
+two.appendTo(main);
+// tenemos la etiqueta canvas en nuestro control 
+const canv = document.getElementsByTagName('canvas')[1];
+let punteadaColor: string = 'red';
+let redondeadaColor: string = 'blue'
+canv.classList.add('nubesitas')
+// import { randomColor } from "./main";
+abstract class Elemento {
+   private _color: string;
+   private _contexto: CanvasRenderingContext2D | null;
+    
+   
+   constructor(contexto: CanvasRenderingContext2D | null, color?: string){
+       this._contexto = contexto;
+       if(color){
+        this._color = color;
+       }else{
+            this._color = randomColor();
+       }
+    }
+    public get color_1(): string {
+         return this._color;
+     }
+     public set color(value: string) {
+         this._color = value;
+     }
+     
+     public get contexto(): CanvasRenderingContext2D | null {
+         return this._contexto;
+     }
+     public set contexto(value: CanvasRenderingContext2D) {
+         this._contexto = value;
+     }
+
+}
+
+class Estrella extends Elemento{
+    protected x: number;
+    protected y: number;
+
+    constructor(contexto: CanvasRenderingContext2D | null, color?: string){
+        super(contexto, color)
+        this.x = randomNumber(1,(contexto?.canvas.width - 2));
+        this.y = randomNumber(1, (contexto?.canvas.height- 10));
+    }
+    // metodo para pintar una estrella en el dom de manera general se pueden asignar parametros como que tanto tendra su radio y sus lados 
+    pintar(innerRadio: number, outRadio: number, sides?: number = 5){
+        // lados por defecto de una estrellas 
+        
+        this.x = randomNumber(1,(this.contexto?.canvas.width - 2));
+        this.y = randomNumber(1, (this.contexto?.canvas.height- 10));
+        const star = two.makeStar(this.x, this.y,innerRadio, outRadio, sides );
+        star.fill = this.color;
+        star.linewidth = 4;
+        if(!!this.color_1) star.fill = this.color_1;
+        
+    }
+}
+
+// EstrellaRedonda y otra con el nombre EstrellaPunteada
+class EstrellaPunteada extends Estrella{
+
+    constructor(contexto: CanvasRenderingContext2D | null, color?: string){
+        super(contexto, color);
+    }
+    pintarPunteada(){
+        this.pintar(23, 10)
+        punteadaColor = this.color_1
+    }
+}
+class EstrellaRedonda extends Estrella{
+    constructor(contexto: CanvasRenderingContext2D | null, color?: string){
+        super(contexto, color);
+    }
+   pintarRedonda(){
+        this.pintar(27, 21, 6);
+        redondeadaColor = this.color_1
+   }
+}
+class Sky extends Elemento{
+    constructor(contexto: CanvasRenderingContext2D, color: string){
+        super(contexto, color);
+    }
+    paintSky(estPunt: EstrellaPunteada, estCirc: EstrellaRedonda, maxStars?: number){
+        if(!maxStars) maxStars = 15;
+        for (let index = 0; index < randomNumber(1, maxStars); index++) {
+            canvas.style.backgroundColor = this.color_1;
+            estPunt.pintarPunteada();
+            estCirc.pintarRedonda();
+        }
+    }
+}
+// variable vincularla con la logica del boton para agregar estrellas 
+let itsStarToggle = true;
+const button = document.getElementById('botones')
+const two2 = new Two({
+    fullscreen: false,
+    width: 50,
+    height: 50,
+    type: Two.Types.svg,
+})
+const botonStarMedidas =  {
+    x: 25,
+    y: 25,
+inner: 23,    
+out: 10,
+sides: 5,
+
+}
+let estrellita1 = two2.makeStar(botonStarMedidas.x,botonStarMedidas.y,botonStarMedidas.inner,botonStarMedidas.out,botonStarMedidas.sides);
+estrellita1.fill = 'black';
+two2.update();
+// evento y condicional para cambiar la logica del boton al colocar las estrellas en el tren 
+button.addEventListener('click', ()=>{
+    itsStarToggle = !itsStarToggle;
+    if(itsStarToggle){
+        two2.remove(estrellita1[0]);
+        estrellita1 = two2.makeStar(botonStarMedidas.x,botonStarMedidas.y,botonStarMedidas.inner,botonStarMedidas.out,botonStarMedidas.sides);
+        estrellita1.fill = 'black';
+        two2.update();
+    }else{
+        two.remove(estrellita1[0]);
+        estrellita1 = two2.makeStar(botonStarMedidas.x,botonStarMedidas.y, 27, 21, botonStarMedidas.sides + 1);
+        estrellita1.linewidth = 2;
+        estrellita1.fill = 'white'
+        two2.update();
+    }
+})
+two2.appendTo(button);
+const vertexSize = 12;
+const vertexOutLineSize = vertexSize / 4;
+const vertexGroup = two.makeGroup();
+const estrelli = new EstrellaPunteada(canv.getContext('2d'), randomColor());
+const estRedonda = new EstrellaRedonda(canv.getContext('2d'), randomColor());
+const sky = new Sky(canvas?.getContext('2d'), randomColor());
+sky.paintSky(estrelli, estRedonda, 13);
+let option = 'punteada';
+canv.onclick = (event)=>{
+    const vertices = vertexGroup.children; 
+    let x = event.offsetX;
+    let y = event.offsetY;
+    console.log({y, x});
+    let vertex: void;
+        if(itsStarToggle){
+        vertex = two2.makeStar(x,y,23,10,5);
+            vertex.fill = punteadaColor;
+        }else{
+
+        vertex = two2.makeStar(x,y, 30, 20, 6);
+        vertex.fill = redondeadaColor;
+        }
+
+            // x and y postion of the click event
+    // 
+    // vertex.fill = '#9911ff'
+    vertex.linewidth = vertexOutLineSize;
+    // if(vertices.length > 1){
+    //     createEdge(x,y, vertices)
+    // }
+    vertexGroup.add(vertex)
+}
+two.play();
 
 class Tren {
     private _nombre : string = 'tren';
@@ -154,23 +343,21 @@ class Tren {
     }
 }
 
-function randomColor(){
-    let colors = ['pink','gray', 'orange', 'blue', 'red', 'lightblue', 'purple', 'bisque', 'green', 'lightgreen', 'yellow', 'brown']
-    return colors[Math.floor(Math.random() * colors.length)]
-}
 
 
 let miTren = new Tren()
 // miTren.nombre = 'juan'
 miTren.pintar()
-window.addEventListener('load', ()=>{
+document.getElementById('avanzar').addEventListener('click', ()=>{
 
     let counter = 0;
     const timer = setInterval(()=>{
         counter++;
         document.getElementById('velocidad').textContent =   `has recorrido ${counter} metros`;
-        if(canvas) canvas.style.left = `${counter * 2}px`;
-        console.log('me estoy moviendo ' + counter + "rem");
+        if(canvas) 
+            canvas.style.left = `${counter * 2}px`;
+            canv.style.left = `${counter * 2}px`;
+        if(counter == 25) clearInterval(timer);
     }, 1000)
     console.log(timer);
     
@@ -181,4 +368,19 @@ fetch(api).then(response => {if(response.ok) return response.json()})
     document.getElementById('imageCH19')?.setAttribute('src', json?.avatar_url);
     document.getElementById('linkName')?.setAttribute('href', json?.html_url);
 });
-})
+});
+
+
+function randomNumber(min: number, max:number){
+    return Math.floor(Math.random() * (max - min + 1 ) + min);
+}
+function randomColor(){
+    // let colors = ['pink','gray', 'orange', 'blue', 'red', 'lightblue', 'purple', 'bisque', 'green', 'lightgreen', 'yellow', 'brown']
+    // return colors[Math.floor(Math.random() * colors.length)]
+    const letters: string = '0123456789ABCDEF';
+    let color:string = '#';
+    for (let index = 0; index < 6; index++) {
+    color += letters[Math.floor(Math.random() * (letters.length - 1))]        
+    }
+    return color
+}

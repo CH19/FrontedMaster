@@ -1,46 +1,32 @@
-import './cardsStyles.css'
+// import Card from '@/app/components/main/card';
+// const users = ['AvilaPro', 'CH19'];
+// // para la creacion de los dos usuarios no se va a utilizar en lugar de crear dos variables la creacion y recorrido de dos usarios en la app de github
+// // esto se hara en cuestion ya que se plantea el desafio como el inicio de una aplicacion que siga el principio "DRY" (Don't Repeat Yourself) 
+// // // y en el planteamiento de solucione sy creaciones de usario sea mas facil y mantinible cambiando solo los datos de la api 
+// const usariosThreads = new Map();
+// let arr1;
+// const arr = users.forEach((user, index)=>{
+//     fetch(`https://api.github.com/users/${user}`)
+//     .then(response => {if(response.ok) return response.json()})
+//     .then(json => usariosThreads.set(json.login, {
+//         nameAccount: json.login,
+//         linkFeed: json.html_url,
+//         description: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit'.repeat(Math.floor(Math.random() * 3)),
+//         imgFeed: json.avatar_url, 
+//         likes: Math.floor(Math.random() * 1000).toString(),
+//         timestamp: json.updated_at,
+//     }))
+//     return usariosThreads
+//     // .catch(error=> console.error(error));
+// }).then(map => arr1 = Array.from(map.values).map(data => <Card user={data}></Card>))
+// window.addEventListener('load',()=>{
+//     console.log(arr1);
+// })
 
-export default function Cards({user}){
-    return (
-        // se trabajara en el componente card para mejorar su estilo esto solo es una prueba prototipo 
-        <>
-          {/* <div className="card my-2" style={{ width: "20rem", height: "20rem" }}>
-  <img src="#" className="card-img-top" alt="..." />
-  <div className="card-body">
-    <h5 className="card-title">Card title</h5>
-    <p className="card-text">
-      Some quick example text to build on the card title and make up the bulk of
-      the card's content.
-    </p>
-    <a href="#" className="btn btn-primary">
-      Go somewhere
-    </a>
-  </div>
-</div> */}
-{/* // keys: nameAccount, linkFeed, description, imgFeed, likes,
-//  timestamp */}
-    <div className="card-container">
-    <div className="card-header">
-    <div className="cad-information">
-      <figure className="card-porfile-photo"><img src={user.imgFeed} alt=""></img></figure>
-      <div className="card-childs">
-      <span className="card-username">{user.nameAccount}</span>
-      <a href={user.linkFeed} className="card-link">{user.linkFeed}</a>
-      </div>
-      </div>
-      <div className="card-timer"><span>{user.timestamp}</span></div>
-    </div>
-    <div className="card-body">
-      <span>{user.description}</span>
-      <figure className="card-photo"><img src={user.imgFeed} alt=""></img></figure>
-    </div>
-    <div className="card-footer"><figure><img height="32" width="32" src="https://cdn.simpleicons.org/undertale/black" />{user.likes} likes</figure>
-      <div>#</div>
-      <div>#</div>
-      <div>#</div>
-    </div>
-    </div>
-
-        </>
-    )
-}
+// export default function Cards(){
+//     return (
+//         <div>
+//             {arr1}
+//         </div>
+//     )
+// }

@@ -15,16 +15,9 @@
 </div> */
 :root{
   --white: #FFF;
+  --iconsSize: 1em;
 }
 
-.main{
-  width: 100vw;
-  height: fit-content;
-  align-items: center;
-  justify-content: space-around;
-  display: flex;
-  flex-direction: column;
-}
 .card-container{
   width: 30em;
   background-color: whitesmoke;

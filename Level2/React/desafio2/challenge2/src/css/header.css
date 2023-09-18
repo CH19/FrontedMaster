@@ -1,0 +1,19 @@
+.feather {
+    width: var(--iconsSize);
+    height: var(--iconsSize);
+    /* investigar estas propiedades  */
+    stroke: currentColor;
+    stroke-width: 1;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+    color: black;
+  }
+  .main{
+    width: 100vw;
+    height: fit-content;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    flex-direction: column;
+  }

@@ -1,7 +1,8 @@
-import 'bootstrap/dist/css/bootstrap.css';
 import Crear from './crear';
+import Card from './card';
 import Cards from './cards';
-
+import Error from './Error';
+import Mensajes from './mensajes';
 // requerimiento 1 
 // keys: nameAccount, linkFeed, description, imgFeed, likes,
 //  timestamp. Colocar valores a esos keys que puede tomar como ejemplo de algunas publicaciones de la aplicacion Threads de Meta.
@@ -32,16 +33,17 @@ const estaLogeado = true;
 export default function Main(){
     // se pone solo este condicional porque si la condicion es falsa ya retornara lo que esta entre corchetes por lo tanto no es necesario anidar un else 
         if(!estaLogeado){
-            return <h2 className='login-error'>Necesitas registrarte</h2>
+            return ( <Error mensaje={'Error cuenta inexistente registrese'}></Error>)
         }
         return (
             <>
             <div className='main my-5 my-5'>
                 <Crear></Crear>
+                <Mensajes></Mensajes>
                 <hr/>
-                <Cards user={usariosThreads.get(users[0])}></Cards>
-                {/* <hr></hr> */}
-                <Cards user={usariosThreads.get(users[1])}></Cards>
+                <Card user={usariosThreads.get(users[0])}></Card>
+                <Card user={usariosThreads.get(users[1])}></Card>
+                {/* <Cards></Cards> */}
     
     
             </div>

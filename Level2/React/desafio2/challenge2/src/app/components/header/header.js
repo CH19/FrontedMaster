@@ -1,7 +1,6 @@
 import Nav from './nav';
 import HamburguerMenu from './hamburguerMenu';
 import Porfile from './porfile'
-import 'bootstrap/dist/css/bootstrap.css';
 export default function Header(){
     return (
         <>

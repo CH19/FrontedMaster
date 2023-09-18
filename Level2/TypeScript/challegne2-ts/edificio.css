@@ -1,0 +1,13 @@
+#bigContainer{
+   display: flex;
+}
+#main{
+    /* display: flex;
+    position: relative; */
+}
+.edificio{
+    background-color: red;
+   /* position: absolute;
+   right: 0;
+   top: -4rem;*/
+} 
