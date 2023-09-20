@@ -112,7 +112,7 @@ class Sky extends Elemento{
     paintSky(estPunt: EstrellaPunteada, estCirc: EstrellaRedonda, maxStars?: number){
         if(!maxStars) maxStars = 15;
         for (let index = 0; index < randomNumber(1, maxStars); index++) {
-            canvas.style.backgroundColor = this.color_1;
+            // canvas.style.backgroundColor = this.color_1;
             estPunt.pintarPunteada();
             estCirc.pintarRedonda();
         }
@@ -187,6 +187,7 @@ canv.onclick = (event)=>{
     // }
     vertexGroup.add(vertex)
 }
+two.play();
 
 class Tren {
     private _nombre : string = 'tren';

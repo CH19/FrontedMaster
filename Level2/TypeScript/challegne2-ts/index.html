@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trenes y vayas</title>
     <link rel="stylesheet" href="./edificio.css">
+    <script src="https://unpkg.com/feather-icons"></script>
     <style>
         :root{
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -26,8 +27,9 @@
             cursor: pointer;
         }
         button:hover{
-            padding: 5px;
-            transition: 1s;
+            background-color: #58A2E1;
+            color: #fff;
+            transition: .5s;
         }
     
     </style>
@@ -39,7 +41,10 @@
         
     </div>
     <div style="display: flex;"><button style="z-index: 1000;" id="avanzar">Avanzar Tren</button></div>
-    <div id="buildingName">    <input type="text" placeholder="Escribir nombre edificio"> <button>Escribir nombre</button>    </div>
+    <div id="buildingName">    <input type="text" placeholder="Escribir nombre edificio"> <button>Escribir nombre</button> 
+        <button style="display: none;">Cambiar nombre</button>  
+    </div>
+<div id="flechita"><i data-feather="arrow-down"></i></div>
 </div>    
     <h3 style="display: flex; justify-content: flex-end;" id="velocidad"></h3>
     <div id="bigContainer">
@@ -56,6 +61,9 @@
         <figure style="display: block; width: 5rem; height: 5rem;"><a style="display: flex; align-items: center; justify-content: center;" href="https://cadif1.com/"><img src="https://cadif1.com/img/template/logo-cadif1.svg" alt=""></a></figure>
     </div>
 
+    <script>
+        feather.replace();
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/two.js/0.6.0/two.min.js"></script>
     <script src="./js/main.js"></script>
     <script src="./js/edificio.js"></script>

@@ -1,3 +1,7 @@
+*{
+    font-family: 'Segoe UI', sans-serif;
+    color: #fff;
+}
 #bigContainer{
    display: flex;
 }
@@ -13,9 +17,24 @@
     justify-content: flex-end;
 }
 .edificio{
-    background-color: red;
+    background-color: none;
     
    /* position: absolute;
    right: 0;
    top: -4rem;*/
 } 
+input{
+    padding: 20px;
+    color: black;
+
+}
+.flechita{
+    max-width: 15rem;
+    position: absolute;
+    height: 30rem;
+    background-color: red;
+}
+.feather {
+    width: 10rem;
+    height: 10rem;
+}

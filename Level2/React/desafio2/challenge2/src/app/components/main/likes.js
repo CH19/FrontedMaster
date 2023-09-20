@@ -2,9 +2,6 @@ import { useState } from "react"
 
 export default function Likes({like}){
     const [likee, setLikes] = useState(like);
-    const changeColor = ()=>{
-     const newLikes = {...likee};
-    }
     const aumentarLikes = ()=>{
         if(String(likee).localeCompare(like) == 0){
             return Number(likee) + 1;
@@ -15,7 +12,7 @@ export default function Likes({like}){
 
     return (
         <>
-        <button onClick={()=>{setLikes(aumentarLikes());}} className={ `${likee > like ? 'bg-danger': ''}`}> likes {likee}</button>
+        <button style={{cursor: 'pointer'}} onClick={()=>{setLikes(aumentarLikes());}} className={ `${likee > like ? 'bg-danger': ''}`}> likes {likee}</button>
         </>
     )
 }

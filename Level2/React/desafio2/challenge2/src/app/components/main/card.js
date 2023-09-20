@@ -1,5 +1,6 @@
 import Error from "./Error";
 import Likes from "./likes";
+var TotalLikes = 0;
 export default function Card({user}){
    
   

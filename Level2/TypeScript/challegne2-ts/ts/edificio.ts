@@ -1,38 +1,4 @@
-
-
-// 1.- Crear una clase con el nombre Ventana que herede de la clase Figura, que tenga los atributos: tamaño (number), conMarco (boolean), luzEncendida (boolean). Sobre escribir el método "pintar", que debe pintar la ventana en la posición X,Y que tenga. El ancho y el alto se debe conseguir usando el atributo tamaño. El color de fondo dependerá de si la luz esta encendida (amarillo) 
-// o no (negro). Si el atributo conMarco es true, la ventana debe tener un marco, de lo contrario no. En el constructor los valores de
-//  los atributos "conMarco" y "luzEncendida" son opcionales y deben asignarse aleatoriamente si no se reciben
-
-// 2.- Crear una clase con el nombre Piso que herede de la clase Figura, que tenga el atributo nroVentanas (number), ancho (number) y 
-// alto (number). El alto debe ser un atributo Static y constante. En el constructor se debe recibir por parámetro el ancho, el color, 
-// la posición X,Y, pero el atributo nroVentanas debe ser un número aleatorio. Sobre escribir el método "pintar", que debe pintar un 
-// rectangulo usando la posición X,Y,
-// y ese piso lo debe pntar del color que tenga el atributo color. Luego debe instanciar tantas ventanas como tenga el atributo 
-// nroVentanas y llamar el método "pintar" de cada una. El tamaño de las ventanas debe calcularse en base al ancho del piso, de 
-// modo tal que todas quepan (todas las ventanas deben tener el mismo tamaño y debe haber una pequeña separación entre estas).
-
-// 3.- Crear la clase Edificio que herede de la clase Figura, que tenga los atributos nroPisos (number), ancho (number) y nombre 
-// (string). El constructor debe recibir por parámetros: el nombre del edificio, el número de pisos, la posición X y la posición Y.
-//  El color y el ancho se determinan de forma aleatoria.
-
-// 4.- Sobre escribir el método pintar de la clase Edificio, que debe instanciar y dibujar tantos objetos de la clase Piso como número 
-// de pisos tenga el edificio, enviando por parámetro al constructor de Piso: el color, el ancho y la posición X del edificio
-// . El primer piso debe estar en la posición Y del edificio menos el alto de un piso, el sengundo piso debe estar en la posición 
-// Y menos el alto de 2 pisos (this.Y - Piso.alto*i) y asi sucesivamente. Luego de pintar todos los pisos, se debe mostrar el nombre
-//  del edificio (arriba del último piso)
-
-// 5.- Crear un archivo HTML con un canvas que ocupe toda la página. Agregar un botón y programar el evento click del botón para que 
-// ejecute una función que pida al usuario un nombre (usando prompt) y luego instancie un objeto de la clase Edificio, pasando por 
-// parámetro al constructor el nombre del edificio (el que el usuario escribió), un número de pisos aleatorio, una posición X aleatoria,
-//  la posición Y debe ser el borde inferior del canvas. Luego de instanciar el edificio debe ejecutar el método dibujar
-
-
-// Se inicializa el objeto Two en este caso two3 porque es el tercero creado para obtener todos los metodos de Two.js incluyendo la creacion de un
-// canvas para la creacion del edificio 
-
 // import Two from 'two.js'
-
 const two3 = new Two({
     fullscreen: false,
     width: canvas?.height + 300,
@@ -71,14 +37,6 @@ class Ventana extends Figura{
     }
  
     pintar() {
-        // const ventanas = two3.makeGroup(
-        // let position = this.postionX;
-        // for (let index = 0; index <  nmroVentanas; index++) {
-        //      
-        //     position += 50;
-        //     ventanas.add(ventana);
-
-        // }    
         const ventanita = two3.makePolygon(this.positionX, this.positionY, this.tamanno, 4 );
         ventanita.fill = this.luzEncendida ? 'yellow' : 'black';
         if(this.comMarco) {
@@ -88,11 +46,6 @@ class Ventana extends Figura{
         two3.update()
     }
 }
-// 2.- Crear una clase con el nombre Piso que herede de la clase Figura, que tenga el atributo nroVentanas (number), ancho (number) y 
-// alto (number). El alto debe ser un atributo Static y constante. En el constructor se debe recibir por parámetro el ancho, el color, 
-// la posición X,Y, pero el atributo nroVentanas debe ser un número aleatorio. Sobre escribir el método "pintar", que debe pintar un 
-// rectangulo usando la posición X,Y,
-
 // se hereda de figura y se crea la clase Piso 
 class Piso extends Figura{
     private _nroVentanas: number = randomNumber(1, 5);
@@ -109,7 +62,7 @@ class Piso extends Figura{
 
         const pisito = two3.makeRectangle(this.positionX, this.positionY, this.ancho, Piso._alto);
         pisito.fill = this.color
-        let position = 350;
+        let position = this.positionX;
         const tamanoVentana =  (this.ancho / 3.8) / this.nroVentanas;
         console.log('ancho',Math.sqrt(Piso.alto));
         console.log(position);
@@ -120,10 +73,8 @@ class Piso extends Figura{
             position -=  tamanoVentana * 2;
             console.log(position);
         }
-        // const ventana = new Ventana(300, this.posicionY, Piso.alto);
-
         console.log(this.ancho);
-        two3.update()
+        two3.update();
     }
     public get nroVentanas(): number {
         return this._nroVentanas;
@@ -134,8 +85,6 @@ class Piso extends Figura{
     public static get alto(): number {
         return Piso._alto;
     }
- 
-    
 }
 class Edificio extends Figura{
     nmrPisos: number = 0;
@@ -164,8 +113,7 @@ class Edificio extends Figura{
             posicion -= Piso.alto;
             
         }
-        posicion -= 30;
-        two3.makeText(this.nombre, 350, posicion, {size: 30});
+        two3.makeText(this.nombre, this.positionX, posicion, {size: 30});
         two3.update();
         console.log('posicion',posicion);
     }
@@ -175,19 +123,43 @@ class Edificio extends Figura{
 (()=>{
 // se coloca como width el ancho de canvas - 5 para que quepa completo 
     changeBuildingName();
-    const newEdicio = new Edificio(350, two3.height - 100, 'christian' );
-    // const piso = new Piso(350, two3.height - 100, two3.width - 5, randomColor());
-    // const piso2 = new Piso(350, two3.height - 300, two3.width - 5, randomColor());
     console.log(two3.width);
 
 })()
 
 function changeBuildingName(){
+//    funccion para la creacion del edificio se hace uso del sesion Storage para que al momento de recargar la pagina el usuario pueda usar 
+//    los datos ya puestos del nombre del edificioContainer, si el usuario desea cambiar de nombre tambien se tiene otra opccion 
     window.addEventListener('load', ()=>{
         const buildingName = document.getElementById('buildingName');
+        buildingName?.children[2].addEventListener('click', ()=>{
+            window.sessionStorage.removeItem('name');
+            buildingName.children[0].style.display = 'block';
+            buildingName.children[1].style.display = 'block';
+
+            location.reload()
+        })
+        if(window.sessionStorage.getItem('name')){
+            buildingName.children[0].style.display = 'none';
+            buildingName.children[1].style.display = 'none';
+            buildingName?.children[2].style.display = 'block';
+            let name = window.sessionStorage.getItem('name');
+            return new Edificio(randomNumber(0, two3.width), two3.height - 100, `Edificio ${capitalizar(String(window.sessionStorage.getItem('name').replace(/['"]+/g, '')))}` )
+        }
+        
         buildingName?.children[1].addEventListener('click', ()=>{
             const name: HTMLInputElement = buildingName.children[0]?.value;
-            
+            const newEdicio = new Edificio(randomNumber(0, two3.width), two3.height - 100, `Edificio ${capitalizar(String(name))}` );
+            buildingName.children[0].value = '';
+            buildingName.children[0].style.display = 'none';
+            buildingName.children[1].style.display = 'none';
+
+            buildingName.children[2].style.display = 'block';
+            window.sessionStorage.setItem('name', JSON.stringify(name))
         })
+      
     })
+}
+function capitalizar(word: string) {
+    return word.substring(0, 1).toUpperCase() + word.substring(1, word.length);
 }

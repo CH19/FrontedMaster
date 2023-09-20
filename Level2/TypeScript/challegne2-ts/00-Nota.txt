@@ -1,0 +1,3 @@
+En este desafio me volvi a tomar otras libertades para ser mas creativo, como vera segui con el tren y bueno cree el edificio
+en el contexto que sirva como decoracion de ciudad, cumple con las funcionalidades del desafio salvo en la que dice que 
+el canvas tiene que abarcar la pantalla completa, hago esta acotacion por eso mismo.
