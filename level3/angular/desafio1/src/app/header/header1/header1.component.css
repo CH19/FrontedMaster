@@ -64,6 +64,7 @@
 .options-menu{
   display: flex;
   width: 30%;
+  gap: 5px;
   justify-content: space-around;
 }
 .options-menu button{
@@ -71,6 +72,7 @@
   background-color: #FEE500;
   border: none;
   cursor: pointer;
+  white-space: nowrap;
 }
 .options-menu button:focus{
   color: #000;

@@ -14,7 +14,7 @@ export class Header1Component {
     url: 'https://www.mercadolibre.com',
   }
   promo = '¡oferta!';
-  data = [1,2,3,4,5];
+  data = ['Historial','Tiendas Oficiales','Ofertas de la semana','Vender','Ayuda'];
   // user = {
   //   username: optionsUser.User,
   //   favs: optionsUser.MisFavoritos,
