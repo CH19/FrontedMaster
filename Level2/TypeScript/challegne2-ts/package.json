@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "two.js": "^0.8.11",
+    "typescript": "^5.2.2"
+  }
+}

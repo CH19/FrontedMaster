@@ -32,9 +32,6 @@ coverage
 node_modules
 
 # TypeScript files 
-tsconfig.json
-package.json
-package-lock.json
 
 # Next and React dependeces 
 /node_modules
@@ -79,7 +76,6 @@ Level2/React/desafio1/public/favicon.ico
 Level2/React/desafio1/.nvmrc
 
 # archvivos json 
-*.json
 
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
