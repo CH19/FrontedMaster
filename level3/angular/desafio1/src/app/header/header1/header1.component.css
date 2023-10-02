@@ -1,0 +1,15 @@
+*{
+  font-weight: 50;
+}
+.search-container{
+  background-color: #FEE500;
+}
+.logo{
+  background-image: url(https://play-lh.googleusercontent.com/lO0-UT9yyZ55shpgJVKcBxYGd1MWwdsxoK1GjNcd9FkcYHX4yjjj5OqktP0O1rVoTwU=w240-h480);
+  width: 60px;
+  height: 30px;
+  background-color: red;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
