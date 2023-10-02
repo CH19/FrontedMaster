@@ -2,9 +2,36 @@
   <div class="search">
     <a href="">
       <div class="logo"></div>
+      <div class="hamburguerMenu">+</div>
     </a>
-    <h3>{{promo}}</h3>
+    <div class="search-bar">
+      <input type="text" placeholder="Buscar producto marca o mas..." >
+      <div></div>
+    </div>
+    <div class="mobile-notifications">+</div>
 
+    <div class="search-promo">
+      <div></div>
+      <p>{{promo}}</p>
+    </div>
+  </div>
+  <div class="options">
+    <div class="options-categories">
+      <select name="" id="categories">
+        <option value="1">Categorias</option>
+      </select>
+    </div>
+    <div class="options-menu">
+      <button *ngFor="let i of data">
+        cosa {{i}}
+    </button>
+    </div>
+    <div class="options-user">
+      <select name="" id="" style="background-color: #FEE500; border: none;"><option value="Eduardo">Eduardo</option></select>
+      <p>Mis compras</p>
+        <p>Favoritos</p>
+        <p>+</p>
+    </div>
   </div>
 </div>
 

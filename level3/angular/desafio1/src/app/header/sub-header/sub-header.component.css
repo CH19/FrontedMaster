@@ -1,4 +1,8 @@
-*{
-  color: red;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+img{
+  width: 97.5vw;
+}
+@media screen and (max-width: 600px) {
+  img{
+    height: 30vh;
+  }
 }
