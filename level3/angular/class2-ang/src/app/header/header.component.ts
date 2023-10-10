@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HAMMER_LOADER } from '@angular/platform-browser';
 import {NgbConfig} from '@ng-bootstrap/ng-bootstrap';
 
 
