@@ -1,0 +1,15 @@
+<div class="products-container">
+  <mat-card *ngFor="let photo of AllPhotos" style="border: 1px black solid;">
+    <mat-card-header>
+      <mat-card-title> <span>{{photo.id}}</span>
+        <br>
+        <img mat-card-lg-image src="{{photo.images[0]}}" alt="">
+
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>{{photo.description}}</mat-card-content>
+    <mat-card-footer>Estamos poniendolo al final <br>
+        <button mat-raised-button>Comprar</button> </mat-card-footer>
+
+  </mat-card>
+</div>

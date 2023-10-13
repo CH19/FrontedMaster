@@ -19,11 +19,18 @@ import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { CarruselComponent } from './carrusel/carrusel.component';
+import {ImagesProductComponent} from './images-product/images-product.component'
 
-@NgModule({
+
+// Angular material
+
+import {MatCardModule} from '@angular/material/card';
+import { CardComponent } from './card/card.component'; @NgModule({
   declarations: [
     AppComponent,
     CarruselComponent,
+    CardComponent,
+    ImagesProductComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +49,8 @@ import { CarruselComponent } from './carrusel/carrusel.component';
     MdbTabsModule,
     MdbTooltipModule,
     MdbValidationModule,
-    NoopAnimationsModule
+    NoopAnimationsModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
