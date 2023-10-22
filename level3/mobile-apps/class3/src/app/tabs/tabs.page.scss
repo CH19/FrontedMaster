@@ -1,0 +1,15 @@
+
+@import '../app.component.scss';
+
+ion-tab-bar, ion-tab-button{
+  background-color: $background;
+  ion-icon{
+    color: $gray1;
+    &:focus{
+      color: #fff;
+    }
+  }
+  &:active{
+    background-color: $green;
+  }
+}

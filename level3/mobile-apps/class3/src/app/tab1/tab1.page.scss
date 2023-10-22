@@ -1,0 +1,15 @@
+@import '../app.component.scss';
+ion-title{
+  &.title-large{
+    font-size: 1.5rem;
+  }
+  --color: $gray;
+  position: absolute;
+  left: 0;
+}
+ion-buttons{
+
+  ion-icon{
+    font-size: 1.2rem;
+  }
+}

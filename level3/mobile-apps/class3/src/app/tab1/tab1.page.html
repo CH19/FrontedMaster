@@ -1,0 +1,27 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="dark">
+    <ion-title size="large" slot="start" color="light"><span>{{time()}}</span>
+    </ion-title>
+    <ion-buttons collapse="true" slot="end" >
+      <ion-button *ngFor="let icon of icons">
+        <ion-icon color="light" size="medium" [name]="icon"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large" slot="start" color="light"><span>{{time()}}</span>
+      </ion-title>
+      <ion-buttons collapse="true" slot="end" >
+        <ion-button *ngFor="let icon of icons">
+          <ion-icon color="light" size="medium" [name]="icon"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <app-explore-container name="Tab 1 page"></app-explore-container>
+</ion-content>
