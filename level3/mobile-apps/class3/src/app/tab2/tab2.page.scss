@@ -1,0 +1,18 @@
+@import '../app.component.scss';
+ion-header{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: $background2;
+}
+ion-title{
+  font-size: 1rem;
+  --color: #FFF
+}
+ion-item{
+  --border-radius: 30px;
+  width: fit-content;
+
+  ion-input{
+  }
+}

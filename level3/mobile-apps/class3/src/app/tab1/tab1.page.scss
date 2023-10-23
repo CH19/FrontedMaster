@@ -7,9 +7,12 @@ ion-title{
   position: absolute;
   left: 0;
 }
+ion-iten{
+  --background: red;
+}
 ion-buttons{
 
   ion-icon{
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 }
