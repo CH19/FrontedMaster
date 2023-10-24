@@ -10,6 +10,7 @@ export class Tab3Page {
     name: '',
     photo: '',
   }
+  life = 'new app'
   constructor() {}
 
 }
